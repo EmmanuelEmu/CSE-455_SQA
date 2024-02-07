@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\User\Desktop\Student Management System\wiki_upload\env"
+@set "VIRTUAL_ENV=C:\Users\User\Desktop\Student Management System\wiki_upload\SQA_SMS\env"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (

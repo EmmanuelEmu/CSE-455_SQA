@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'C:\Users\User\Desktop\Student Management System\wiki_upload\env'
+    let virtual_env = 'C:\Users\User\Desktop\Student Management System\wiki_upload\SQA_SMS\env'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'
