@@ -1,6 +1,5 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-   path('',views.common_page,name="common_page")
-
+   path('create_department/',views.create_department,name="create_department"),
 ]
