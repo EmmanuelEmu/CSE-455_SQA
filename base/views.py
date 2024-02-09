@@ -56,3 +56,15 @@ def login_admin(request):
                 messages.info(request, 'Username or Password is incorrect')
 
     return render(request, 'base/login.html')
+
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')
+
+
+
+def home(request):
+     
+    return render( request,'base/home.html')
