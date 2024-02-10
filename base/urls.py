@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 urlpatterns = [
-   path('',views.common_page,name="common_page")
+     path('department_info/<str:pk>/',views.department_info,name="department_info"),
+
 
 ]
