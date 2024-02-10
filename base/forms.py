@@ -13,3 +13,9 @@ class CreateUserForm(UserCreationForm):
     class Meta:
         model=User
         fields=['username','email','password1','password2']
+
+class TeacherForm(forms.ModelForm):
+    class Meta:
+        
+        model = Teacher
+        fields = '__all__'

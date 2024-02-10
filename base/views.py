@@ -15,6 +15,16 @@ def common_page(request):
 
 
 
+def create_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TeacherForm()
+    return render(request, 'base/create_teacher.html', {'form': form})
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
