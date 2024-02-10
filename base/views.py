@@ -66,5 +66,68 @@ def logout_user(request):
 
 
 def home(request):
-     
-    return render( request,'base/home.html')
+    std=Student.objects.all().order_by('-id')[:10]
+    regular_std=Student.objects.filter(status='Regular').order_by('-id')[:10]
+    #all_teacher=Teacher.objects.all()
+    top_10_dept=Department.objects.order_by('-id')[:10]
+    #total_teacher=all_teacher.count()
+    total_std=std.count()
+    #total_dept=all_dept.count()
+    context={'std':std,'regular_std':regular_std,'total_std':total_std,'top_10_dept':top_10_dept}
+    return render( request,'base/home.html',context)
+
+
+
+
+def create_student(request):
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = StudentForm()
+    return render(request, 'base/create_student.html', {'form': form})
+
+
+
+
+
+def create_department(request):
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DepartmentForm()
+    return render(request, 'base/create_department.html', {'form': form})
+
+
+
+
+
+def create_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TeacherForm()
+    return render(request, 'base/create_teacher.html', {'form': form})
+
+
+
+
+
+def create_notice(request):
+    if request.method == 'POST':
+        form = AdminNoticeForm(request.POST)
+        if form.is_valid():  
+           notice = form.save()
+           return redirect('home')
+    else:
+       form = AdminNoticeForm()
+
+    return render(request, 'base/create_notice.html', {'form': form})
