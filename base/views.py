@@ -14,5 +14,5 @@ def department_info(request,pk):
     students = dept.student_set.filter().order_by('-id')
     total_teacher=teachers.count()
     total_student=students.count()
-    context={'dept':dept,'students':students,'total_student':total_student,'teachers':teachers,'total_teacher': total_teacher}
+    #context={'dept':dept,'students':students,'total_student':total_student,'teachers':teachers,'total_teacher': total_teacher}
     return render(request,'base/department_info.html',context)
