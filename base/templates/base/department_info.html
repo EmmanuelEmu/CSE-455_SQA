@@ -31,98 +31,7 @@
            </div>
       </div>
 
-
-
-      <div class="col">
-           <div class="col-md">
-                <div class="card text-center text-dark mb-3" id="TS"> 
-                      <div class="card-header">
-                           <h5 class="card-title">Total Students</h5>
-                      </div>
-                      <div class="card-body">
-                           <h3 class="card-header">{{total_student}}</h3>
-                      </div> 
-                </div>
-           </div>
-      </div>
-
-
-
-      <div class="col">
-           <div class="col-md">
-                <div class="card text-center text-dark mb-3" id="TT"> 
-                      <div class="card-header">
-                           <h5 class="card-title">Total Teachers</h5>
-                      </div>
-                      <div class="card-body">
-                            <h3 class="card-header">{{total_teacher}}</h3> 
-                      </div> 
-                </div>
-           </div>
-      </div>
  </div>
-
-   <br>
-   <br>
-
-    <div class =" btn-primary btn-sm btn-block"><h2>Department Teachers</h2></div>
-
-    {%for teacher in teachers%}
-
-        <div class="card text-center ">
-            <div class="card-header bg-dark text-white">
-              <h5 > Teacher ID : {{teacher.id}}</h5>
-            </div>
-            <div class="card-body">
-               <h4 class="card-title text-info  ">{{teacher.name}}</h4>
-               <h5>{{teacher.rank}}</h5>
-                <p class="card-text text-left" >{{teacher.description}}</p>
-           </div>
-           
-           <div class="card-footer text-muted">
-               <h5 class="text-primary">Contact Information</h5>
-           </div>
-
-            Email : {{teacher.email}}<br>
-            Contact Number : {{teacher.phone}}
-       </div>
-      <br>
-      <br>
-   {%endfor%}
-
-
-
-
-<br>
-<br>
-
-  <div class="card card_body">
-              <div class =" btn-primary btn-sm btn-block"><h2>Department Students</h2></div>
-              <table class="table table-sm">
-                  <tr>
-                       <th>Std ID</th>
-                       <th>Name</th>
-                       <th>Department</th>
-                       <th>Session</th>
-                       <th>Details</th>
-                       <th>Update</th>
-                  </tr>
-                  {%for student in students%}
-                        <tr>
-                           <td>{{student.id}}</td>
-                           <td>{{student.name}}</td>
-                           <td>{{student.dept}}</td>
-                           <td>{{student.session}}</td>
-                           <td><a class="btn btn-primary btn-sm" href="{% url  %}">View</a></td>
-                           <td><a class="btn btn-info btn-sm" href="{% url  %}">Update</a></td>
-                        </tr>     
-                  {%endfor%}
-
-                  
-
-
-                </table>
-          </div>
 
 </div>
 
@@ -152,7 +61,7 @@
 <hr>
 <br>
 </tr class="card text-center">   
-    <td><a class="btn btn-primary btn-lg" style="margin-left:50px;" href="{% url  %}">Update</a></td>
-    {% comment %} <td><a class="btn btn-danger btn-lg" style="margin-left:20px;"  href="{% url  %}">Delete</a></td> {% endcomment %}
+    <td><a class="btn btn-primary btn-lg" style="margin-left:50px;" href="{% url %}">Update</a></td>
+    {% comment %} <td><a class="btn btn-danger btn-lg" style="margin-left:20px;"  href="{% url %}">Delete</a></td> {% endcomment %}
 </tr> 
 {%endblock%}
