@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<style>
+.form-group input[type="text"],
+  .form-group textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .form-group input[type="text"] {
+    height: 40px;
+  }
+
+  .form-group textarea {
+    height: 150px;
+  }
+
+  .form-group label {
+    font-weight: bold;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    color: #fff;
+  }
+</style>
+  <div class="container my-4">
+    <h2 class="text-center mb-4">Admin Notice Creation Form</h2>
+    <div class="row justify-content-center">
+    
+      <div class="col-md-7">
+      <div class="card rounded-2 border-1" style="box-shadow: 0 0 10px rgba(7, 28, 145, 0.596); padding:20px;">
+        <form method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="{{ form.sender.id_for_label }}">Sender</label>
+            {{ form.sender }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.receiver.id_for_label }}">Receiver</label>
+            {{ form.receiver }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.subject.id_for_label }}">Subject</label>
+            {{ form.subject }}
+          </div>
+          <div class="form-group">
+            <label for="{{ form.body.id_for_label }}">Body</label>
+            {{ form.body }}
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
