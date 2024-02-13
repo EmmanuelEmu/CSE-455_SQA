@@ -25,6 +25,12 @@ def create_teacher(request):
         form = TeacherForm()
     return render(request, 'base/create_teacher.html', {'form': form})
 
+
+def teacher_info(request,pk):
+    teacher=Teacher.objects.get(id=pk)
+    context={'teacher':teacher}
+    return render(request, 'base/teacher_info.html',context)
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -45,6 +51,16 @@ def register(request):
 
 
 
+
+def create_department(request):
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DepartmentForm()
+    return render(request, 'base/create_department.html', {'form': form})
 
 
 def login_admin(request):

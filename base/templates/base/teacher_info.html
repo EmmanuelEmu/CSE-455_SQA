@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{%block content%}
+
+           <div class="card text-center ">
+                <div class="card-header bg-dark text-white">
+                    <h5 > Teacher ID : {{teacher.id}}</h5>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-info  ">{{teacher.name}}</h4>
+                   <h5>{{teacher.rank}}</h5>
+                   <h5>{{teacher.dept}}</h5>
+                    <p class="card-text text-left" >{{teacher.description}}</p>
+                </div>
+                           <div class="card-footer text-muted">
+                    <h5 class="text-primary">Contact Information</h5>
+                </div>
+
+                Email : {{teacher.email}}<br>
+                Contact Number : {{teacher.phone}}
+           </div>
+        <br>
+        <div class="row">
+           <div class="col-1.5">
+                    {% comment %} <a class="btn btn-danger btn-lg mx-2 " href="{% url 'delete_teacher' teacher.id %}">Delete</a></td> {% endcomment %}
+            </div>
+            <div class="col-1.5">
+               {% comment %} <a class="btn btn-info btn-lg mx-2" href="{% url 'update_teacher' teacher.id %}">Update</a> {% endcomment %}
+            </div>
+        </div>
+{%endblock%}

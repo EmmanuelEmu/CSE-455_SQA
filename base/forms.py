@@ -14,6 +14,12 @@ class CreateUserForm(UserCreationForm):
         model=User
         fields=['username','email','password1','password2']
 
+
+class DepartmentForm(ModelForm):
+    class Meta:
+        model = Department
+        fields = '__all__'
+        
 class TeacherForm(forms.ModelForm):
     class Meta:
         
