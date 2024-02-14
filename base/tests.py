@@ -61,13 +61,12 @@ class DepartmentInfoViewTest(TestCase):
         Tests that the `department_info` view returns a successful HTTP response
         with the correct context for a valid department ID.
         """
-        response = self.client.get(f"/department/{self.department.pk}/")
-        print(response.status_code)
-        """
+        response = self.client.get(f"/department_info/{self.department.pk}/")
+      
         self.assertEqual(response.status_code, 200)
         self.assertTrue('dept' in response.context)
         self.assertEqual(response.context['dept'], self.department)
-        """
+    
     
     def test_department_info_view_404_for_invalid_id(self):
         """
@@ -81,5 +80,5 @@ class DepartmentInfoViewTest(TestCase):
         """
         Tests that the `department_info` view renders the expected template.
         """
-        response = self.client.get(f"/department/{self.department.pk}/")
+        response = self.client.get(f"/department_info/{self.department.pk}/")
         self.assertTemplateUsed(response, "base/department_info.html")
