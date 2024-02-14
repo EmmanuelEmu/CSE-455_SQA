@@ -1,4 +1,3 @@
-{% extends 'main.html' %}
 
 {%block content%}
 <div class="container-fluid" style="text-align:center;margin:0px;width:100%;padding:0px ">
@@ -61,7 +60,7 @@
 <hr>
 <br>
 </tr class="card text-center">   
-    <td><a class="btn btn-primary btn-lg" style="margin-left:50px;" href="{% url %}">Update</a></td>
-    {% comment %} <td><a class="btn btn-danger btn-lg" style="margin-left:20px;"  href="{% url %}">Delete</a></td> {% endcomment %}
+    {% comment %} <td><a class="btn btn-primary btn-lg" style="margin-left:50px;" href="{% url 'department_info' dept.id %}">Update</a></td> {% comment %} 
+    {% comment %} <td><a class="btn btn-danger btn-lg" style="margin-left:20px;"  href="{% url 'department_info' dept.id %}">Delete</a></td> {% endcomment %}
 </tr> 
 {%endblock%}
