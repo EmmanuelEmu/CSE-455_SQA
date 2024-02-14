@@ -14,7 +14,7 @@ def create_department(request):
         form = DepartmentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('create_department')
     else:
         form = DepartmentForm()
     return render(request, 'base/create_department.html', {'form': form})
