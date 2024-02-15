@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+
+
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="card rounded-2 border-1" style="box-shadow: 0 0 10px rgba(7, 28, 145, 0.596);">
+                    <div class="card-body">
+                        <form action="" method="POST" class="form-group">
+                            {% csrf_token %}
+                            <h2 class="text-center mb-4" style="color:#0f97e6">Add/Update Department</h2>
+                            <div class="form-group">
+                                <label >Name:</label>
+                                <input type="text" name="{{ form.name.name }}" id="{{ form.name.id_for_label }}" class="form-control" value="{{ form.name.value }}" required>
+                            </div>
+                         
+
+                            <div class="form-group">
+                                <label for="{{ form.location.id_for_label }}">Location:</label>
+                                {{ form.location }}
+                
+                                {% for error in form.dept.errors %}
+                                    <span class="text-danger">{{ error }}</span>
+                                {% endfor %}
+                            </div>               
+
+
+
+                            <div class="form-group">
+                                <label for="{{ form.rank.id_for_label }}">Rank:</label>
+                                <input type="number" name="{{ form.rank.name }}" id="{{ form.rank.id_for_label }}" class="form-control" value="{{ form.rank.value }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.phone.id_for_label }}">Phone:</label>
+                                <input type="text" name="{{ form.phone.name }}" id="{{ form.phone.id_for_label }}" class="form-control" value="{{ form.phone.value }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.email.id_for_label }}">Email:</label>
+                                <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}" class="form-control" value="{{ form.email.value }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="{{ form.description.id_for_label }}">Description:</label>
+                                <textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" class="form-control">{{ form.description.value }}</textarea>
+                            </div>
+
+                           
+                            <div class="form-group text-center">
+                                <button type="submit" name="Submit" class="btn btn-primary">Submit</button>
+                            </div>
+
+                            
+
+                                            {%for message in messages%}
+                                                <p style="background-color: rgba(247, 151, 151, 0.596);
+                                                    color: Black;
+                                                    padding: 10px;
+                                                    margin-top: 10px;">{{message}}</p>
+                                            {%endfor%}
+                        </form>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
