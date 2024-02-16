@@ -9,45 +9,70 @@ from django.core.exceptions import ObjectDoesNotExist
 from base.views import create_student
 
 class TestCommonPageView(TestCase):
+    """
+    Test case for the common_page view.
+
+    Methods:
+    - setUp(): Set up necessary variables for testing.
+    - test_common_page_view(): Test the common_page view.
+    """
 
     def setUp(self):
+        """
+        Set up necessary variables for testing.
+
+        Creates a test client and defines the common_page URL.
+        """
         self.client = Client()
-        # Replace 'common_page' with  actual URL name
         self.common_page_url = reverse('common_page') 
-        
 
     def test_common_page_view(self):
-        # Simulate a GET request to the common_page view
+        """
+        Test the common_page view.
+
+        Simulates a GET request to the common_page view and asserts the response status code and template used.
+        """
         response = self.client.get(self.common_page_url)
-
-        # Assert that the response status code is 200, indicating success
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the correct template is being used to render the response
         self.assertTemplateUsed(response, 'base/common_page.html')
 
 
-class TestRegisterView(TestCase):
-    
+class TestRegister(TestCase):
+    """
+    Test case for the register view.
+
+    Methods:
+    - setUp(): Set up necessary variables for testing.
+    - test_register_view_get(): Test the GET request to the register view.
+    - test_register_view_post_valid_form(): Test the POST request to the register view with a valid form.
+    """
+
     def setUp(self):
+        """
+        Set up necessary variables for testing.
+
+        Creates a test client and defines the register and login URLs.
+        """
         self.client = Client()
-        self.register_url = reverse('register')  # Replace 'register' with  actual URL name
-        self.login_url = reverse('login')  # Replace 'login' with actual URL name
+        self.register_url = reverse('register')
+        self.login_url = reverse('login')
 
     def test_register_view_get(self):
-        # Simulate a GET request to the register view
+        """
+        Test the GET request to the register view.
+
+        Simulates a GET request to the register view and asserts the response status code and template used.
+        """
         response = self.client.get(self.register_url)
-
-        # Assert that the response status code is 200, indicating success
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the correct template is being used to render the response
         self.assertTemplateUsed(response, 'base/register.html')
 
-       
-
     def test_register_view_post_valid_form(self):
-        # Simulate a POST request to the register view with a valid form submission
+        """
+        Test the POST request to the register view with a valid form.
+
+        Simulates a POST request to the register view with valid form data and asserts the redirection to the login page.
+        """
         form_data = {
             'username': 'testuser',
             'email':'email@gmail.com',
@@ -55,63 +80,75 @@ class TestRegisterView(TestCase):
             'password2': 'TestPassword123!'
         }
         response = self.client.post(self.register_url, data=form_data)
-
-        # Assert that the response redirects to the login page upon successful registration
         self.assertRedirects(response, self.login_url)
 
-       
 
+class TestLoginAdmin(TestCase):
+    """
+    Test case for the login_admin view.
 
-
-
-
-
-
-
-class TestLoginAdminView(TestCase):
+    Methods:
+    - setUp(): Set up necessary variables for testing.
+    - test_login_admin_view_incorrect_credentials(): Test the login_admin view with incorrect credentials.
+    - test_login_admin_view_correct_credentials(): Test the login_admin view with correct credentials.
+    """
 
     def setUp(self):
-        # Create a test user for the correct login attempt
+        """
+        Set up necessary variables for testing.
+
+        Creates a test user for login attempts.
+        """
         self.user = User.objects.create_user(username='testuser', password='testpassword')
 
     def test_login_admin_view_incorrect_credentials(self):
+        """
+        Test the login_admin view with incorrect credentials.
+
+        Simulates a login attempt with incorrect credentials and asserts the response status code and error message.
+        """
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
 
-        # Test login functionality with incorrect credentials
         response = self.client.post(reverse('login'), {
             'username': 'incorrect_user',
             'password': 'incorrect_password'
         })
 
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the error message is present in the response content
         self.assertContains(response, "Username or Password is incorrect")
 
-
     def test_login_admin_view_correct_credentials(self):
+        """
+        Test the login_admin view with correct credentials.
+
+        Simulates a login attempt with correct credentials and asserts the successful redirection to the home page.
+        """
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
 
-        # Test login functionality with correct credentials
         response = self.client.post(reverse('login'), {
             'username': 'testuser',
             'password': 'testpassword'
         })
 
-        # Assert that the login attempt was successful and redirected to the home page (status code 302)
         self.assertEqual(response.status_code, 302)
         self.assertTrue(response.url.endswith(reverse('home')))
 
-        
 
+class TestLogoutAdmin(TestCase):
+    """
+    Test case for the logout_user view.
 
-
-
-class TestLogoutAdminView(TestCase):
+    Methods:
+    - test_logout_user_view(): Test the logout_user view.
+    """
 
     def test_logout_user_view(self):
+        """
+        Test the logout_user view.
+
+        Simulates a GET request to the logout_user view and asserts the response status code.
+        """
         response = self.client.get(reverse('logout'))
         self.assertEqual(response.status_code, 302)
-
