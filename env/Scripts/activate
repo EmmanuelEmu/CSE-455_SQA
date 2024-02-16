@@ -1,6 +1,7 @@
 # This file must be used with "source bin/activate" *from bash*
 # you cannot run it directly
 
+<<<<<<< HEAD
 
 if [ "${BASH_SOURCE-}" = "$0" ]; then
     echo "You must source this script: \$ source $0" >&2
@@ -19,10 +20,22 @@ deactivate () {
     fi
     if ! [ -z "${_OLD_VIRTUAL_PYTHONHOME+_}" ] ; then
         PYTHONHOME="$_OLD_VIRTUAL_PYTHONHOME"
+=======
+deactivate () {
+    # reset old environment variables
+    if [ -n "${_OLD_VIRTUAL_PATH:-}" ] ; then
+        PATH="${_OLD_VIRTUAL_PATH:-}"
+        export PATH
+        unset _OLD_VIRTUAL_PATH
+    fi
+    if [ -n "${_OLD_VIRTUAL_PYTHONHOME:-}" ] ; then
+        PYTHONHOME="${_OLD_VIRTUAL_PYTHONHOME:-}"
+>>>>>>> student_info
         export PYTHONHOME
         unset _OLD_VIRTUAL_PYTHONHOME
     fi
 
+<<<<<<< HEAD
     # The hash command must be called to get it to forget past
     # commands. Without forgetting past commands the $PATH changes
     # we made may not be respected
@@ -30,13 +43,28 @@ deactivate () {
 
     if ! [ -z "${_OLD_VIRTUAL_PS1+_}" ] ; then
         PS1="$_OLD_VIRTUAL_PS1"
+=======
+    # This should detect bash and zsh, which have a hash command that must
+    # be called to get it to forget past commands.  Without forgetting
+    # past commands the $PATH changes we made may not be respected
+    if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+        hash -r 2> /dev/null
+    fi
+
+    if [ -n "${_OLD_VIRTUAL_PS1:-}" ] ; then
+        PS1="${_OLD_VIRTUAL_PS1:-}"
+>>>>>>> student_info
         export PS1
         unset _OLD_VIRTUAL_PS1
     fi
 
     unset VIRTUAL_ENV
     unset VIRTUAL_ENV_PROMPT
+<<<<<<< HEAD
     if [ ! "${1-}" = "nondestructive" ] ; then
+=======
+    if [ ! "${1:-}" = "nondestructive" ] ; then
+>>>>>>> student_info
     # Self destruct!
         unset -f deactivate
     fi
@@ -45,16 +73,21 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
+<<<<<<< HEAD
 VIRTUAL_ENV='C:\Users\User\Desktop\Student Management System\wiki_upload\SQA_SMS\env'
 if ([ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ]) && $(command -v cygpath &> /dev/null) ; then
     VIRTUAL_ENV=$(cygpath -u "$VIRTUAL_ENV")
 fi
+=======
+VIRTUAL_ENV="C:\project\SQA_SMS\env"
+>>>>>>> student_info
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
 PATH="$VIRTUAL_ENV/Scripts:$PATH"
 export PATH
 
+<<<<<<< HEAD
 if [ "x" != x ] ; then
     VIRTUAL_ENV_PROMPT=""
 else
@@ -85,3 +118,27 @@ pydoc () {
 # commands. Without forgetting past commands the $PATH changes
 # we made may not be respected
 hash -r 2>/dev/null
+=======
+# unset PYTHONHOME if set
+# this will fail if PYTHONHOME is set to the empty string (which is bad anyway)
+# could use `if (set -u; : $PYTHONHOME) ;` in bash
+if [ -n "${PYTHONHOME:-}" ] ; then
+    _OLD_VIRTUAL_PYTHONHOME="${PYTHONHOME:-}"
+    unset PYTHONHOME
+fi
+
+if [ -z "${VIRTUAL_ENV_DISABLE_PROMPT:-}" ] ; then
+    _OLD_VIRTUAL_PS1="${PS1:-}"
+    PS1="(env) ${PS1:-}"
+    export PS1
+    VIRTUAL_ENV_PROMPT="(env) "
+    export VIRTUAL_ENV_PROMPT
+fi
+
+# This should detect bash and zsh, which have a hash command that must
+# be called to get it to forget past commands.  Without forgetting
+# past commands the $PATH changes we made may not be respected
+if [ -n "${BASH:-}" -o -n "${ZSH_VERSION:-}" ] ; then
+    hash -r 2> /dev/null
+fi
+>>>>>>> student_info

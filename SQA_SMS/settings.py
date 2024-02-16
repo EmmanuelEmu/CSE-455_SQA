@@ -1,5 +1,3 @@
-from pathlib import Path
-import os
 """
 Django settings for SQA_SMS project.
 
@@ -23,8 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-k^pd$r()u=$_7_j8*0qd5q%uz_$zptd+q22ac%aio#qkz#5_8!'
-SECRET_KEY = 'django-insecure-n9!3b684b0=s0-us&vz6*!*$=o#j1b!hdr46t)cx4*cy$$zdmh'
+SECRET_KEY = 'django-insecure-2*!%oj^kod$ldiffm_o4n(lizmh0qbiyor9jxy4-84t=97gr3j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -126,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
