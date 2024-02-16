@@ -9,15 +9,32 @@ from django.contrib.auth import authenticate,login,logout
 
 
 def home(request):
+    """
+    View for rendering the home page.
+
+    Returns:
+        HttpResponse: Rendered home page.
+    """
     return render(request,'base/home.html')
 
 def common_page(request):
+    """
+    View for rendering the common page.
 
+    Returns:
+        HttpResponse: Rendered common page.
+    """
     return render(request,'base/common_page.html')
 
 
 
 def register(request):
+    """
+    View for user registration.
+
+    Returns:
+        HttpResponse: Rendered registration page.
+    """
     if request.user.is_authenticated:
         return redirect('home')
     else:
@@ -40,7 +57,11 @@ def register(request):
 
 
 def login_admin(request):
-
+    """
+    View for user login.
+    Returns:
+        HttpResponse: Rendered login page.
+     """
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -61,6 +82,12 @@ def login_admin(request):
 
 
 def create_notice(request):
+    """
+    View for creating an administrative notice.
+
+    Returns:
+        HttpResponse: Rendered create notice page.
+    """
     if request.method == 'POST':
         form = AdminNoticeForm(request.POST)
         if form.is_valid():  
@@ -73,6 +100,15 @@ def create_notice(request):
 
 
 def notice_details(request,pk):
+    """
+    View for displaying details of a specific notice.
+
+    Args:
+        pk (str): Primary key of the notice.
+
+    Returns:
+        HttpResponse: Rendered notice details page.
+    """
     notice = AdminNotice.objects.get(id=pk)
     context={'notice': notice}
     return render(request,'base/notice_details.html',context)

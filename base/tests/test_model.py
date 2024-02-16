@@ -4,6 +4,13 @@ from base.models import AdminNotice
 
 class AdminNoticeModelTest(TestCase):
     def test_admin_notice_creation(self):
+        """
+        Test case to ensure the creation and behavior of the AdminNotice model.
+
+        This test creates a sample AdminNotice instance, checks the __str__ method,
+        and verifies if the fields were saved correctly. It also ensures that the
+        date_sent is not in the future.
+        """
         # Create a sample AdminNotice instance
         notice = AdminNotice.objects.create(
             sender="Admin",
