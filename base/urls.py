@@ -123,10 +123,12 @@ urlpatterns = [
 
 
 
-   path('home/',views.home,name="home"),
-
-
+   # URL for the common_page view
    path('',views.common_page,name="common_page"),
+
+
+   # URL for the home view
+   path('home/',views.home,name="home"),
 
 
    path('login/',views.login_admin,name="login"),
@@ -146,5 +148,9 @@ urlpatterns = [
 
     # URL for the create_student view
     path('create_student/', views.create_student, name="create_student"),
+     # URL for the create_notice view
+   path('create_notice/',views.create_notice,name="create_notice"),
+    # URL for the notice_details view with a dynamic parameter 'pk'
+   path('notice_details/<str:pk>/',views.notice_details,name="notice_details"),
 ]
 
