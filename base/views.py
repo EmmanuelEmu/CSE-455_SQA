@@ -16,6 +16,20 @@ def common_page(request):
 
 
 def create_teacher(request):
+    """
+    View function for creating a new teacher.
+
+    This view function handles both GET and POST requests. When a GET request is received,
+    it initializes a new instance of the TeacherForm. When a POST request is received with
+    valid form data, it saves the form data to create a new teacher instance and redirects
+    the user to the 'home' page.
+
+    :param HttpRequest request: The HTTP request object.
+    :returns: A redirect response to the 'home' page if form submission is successful,
+              otherwise, a rendered HTML template displaying the form.
+    :rtype: HttpResponseRedirect or HttpResponse
+
+    """
     if request.method == 'POST':
         form = TeacherForm(request.POST)
         if form.is_valid():
