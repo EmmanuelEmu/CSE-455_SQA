@@ -77,11 +77,7 @@ class Teacher(models.Model):
     :type: str
     """
     description=models.CharField(max_length=3000,null=True)
-    """
-    Description about the teacher.
-
-    :type: str
-    """
+    
 
     def __str__(self):
        return self.name

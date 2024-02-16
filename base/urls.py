@@ -34,12 +34,7 @@ from . import views
    :rtype: django.urls.path
 """
 
-
-urlpatterns = [
-   path('',views.common_page,name="common_page")
-
-
-    
+ 
 """.. function:: path(route, view, name=None)
 
         Defines a URL pattern to match the given route and view function.
@@ -92,8 +87,6 @@ urlpatterns = [
    path('register/',views.register,name="register"),
    path('logout/',views.logout_user,name="logout"),
    
-   
-    path('create_teacher/',views.create_teacher,name="create_teacher"), 
     path('create_teacher/',views.create_teacher,name="create_teacher"),
     path('teacher_info/<str:pk>/',views.teacher_info,name="teacher_info"),
     
