@@ -8,7 +8,24 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import authenticate,login,logout
 
+'''
+create_department
+-----------------
 
+.. function:: create_department(request)
+
+   View function to create a new department.
+
+   This function handles both GET and POST requests. For GET requests,
+   it renders a form to create a new department. For POST requests,
+   it validates the form data and saves the new department if the form
+   is valid.
+
+   :param request: The HTTP request object.
+   :type request: HttpRequest
+   :return: A response to the request.
+   :rtype: HttpResponse
+'''
     
 def create_department(request):
     """
