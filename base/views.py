@@ -39,6 +39,23 @@ def create_teacher(request):
         form = TeacherForm()
     return render(request, 'base/create_teacher.html', {'form': form})
 
+""" This is the views section for teacher info viewing"""
+def teacher_info(request,pk):
+    
+    """
+    View function to display information about a specific teacher.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        pk (int): The primary key of the teacher to display information about.
+
+    Returns:
+        HttpResponse: A response displaying information about the teacher.
+    """
+    teacher=Teacher.objects.get(id=pk)
+    context={'teacher':teacher}
+    return render(request, 'base/teacher_info.html',context)
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -59,6 +76,16 @@ def register(request):
 
 
 
+
+def create_department(request):
+    if request.method == 'POST':
+        form = DepartmentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DepartmentForm()
+    return render(request, 'base/create_department.html', {'form': form})
 
 
 def login_admin(request):
