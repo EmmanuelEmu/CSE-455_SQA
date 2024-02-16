@@ -8,6 +8,24 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import authenticate,login,logout
 
+'''
+department_info(request, pk)
+----------------------------
+
+View function to retrieve and display department information.
+
+Args:
+    request (HttpRequest): An object representing the request.
+    pk (int): The primary key of the department to retrieve.
+
+Returns:
+    HttpResponse: A rendered HTML response displaying department information.
+
+Raises:
+    Department.DoesNotExist: If the department with the given primary key does not exist.
+
+'''
+
 def department_info(request, pk):
     """
     View function to retrieve and display department information.

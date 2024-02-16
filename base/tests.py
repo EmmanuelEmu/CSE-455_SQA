@@ -2,6 +2,28 @@ from django.test import TestCase
 from .models import Department
 from .views import department_info
 
+'''
+DepartmentModelTest
+===================
+
+Test cases for the Department model.
+
+.. autoclass:: myapp.tests.DepartmentModelTest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Department Info View Test
+=========================
+
+Test cases for the Department info view.
+
+.. autoclass:: myapp.tests.DepartmentInfoViewTest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+'''
+
 class DepartmentModelTest(TestCase):
     """
     Test cases for the Department model.
