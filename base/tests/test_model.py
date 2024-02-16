@@ -2,6 +2,9 @@ from django.test import TestCase
 from base.models import Student
 
 class StudentModelTest(TestCase):
+    """
+        Test case to create a student instance and verify its attributes.
+    """
     def test_create_student(self):
         student = Student.objects.create(
             name="Rafi Kibria",
@@ -22,7 +25,7 @@ class StudentModelTest(TestCase):
             CGPA=3.5,
             result_description='Try best until your dreams come true. Best of luck.'
         )
-
+    # Verify attributes of the created student instance
         self.assertEqual(student.name, "Rafi Kibria")
         self.assertEqual(student.hsc_roll, "12345")
         self.assertEqual(student.hsc_reg, "ABCD1234")

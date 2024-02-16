@@ -10,10 +10,16 @@ from base.views import create_student
 class TestCommonPageView(TestCase):
 
     def setUp(self):
+        """
+        Setup method to initialize the test client and common page URL.
+        """
         self.client = Client()
         self.common_page_url = reverse('common_page') 
 
     def test_common_page_view(self):
+        """
+        Test case to verify that the common page view returns a status code of 200 and uses the correct template.
+        """
   
         response = self.client.get(self.common_page_url)
         self.assertEqual(response.status_code, 200)
@@ -23,9 +29,15 @@ class TestCommonPageView(TestCase):
 class TestCreateStudentView(TestCase):
     
     def setUp(self):
+        """
+        Setup method to initialize the test client.
+        """
         self.client = Client()
 
     def test_create_student_view_get(self):
+        """
+        Test case to verify that the create student view returns a status code of 200 and uses the correct template for GET request.
+        """
         
         response = self.client.get(reverse('create_student'))
         self.assertEqual(response.status_code, 200)
@@ -34,6 +46,9 @@ class TestCreateStudentView(TestCase):
         
 
     def test_create_student_view_post_valid_form(self):
+        """
+        Test case to verify that the create student view successfully creates a student object with valid form data.
+        """
         
         form_data = {
             'name': 'Ali ahmed',
@@ -77,6 +92,9 @@ class TestCreateStudentView(TestCase):
 
 
 def test_create_student_view_post_invalid_form(self):
+        """
+        Test case to verify that the create student view returns a status code of 200 and displays form errors for invalid form data.
+        """
        
         form_data = {
             # 'name': 'Ali ahmed',
@@ -103,10 +121,16 @@ def test_create_student_view_post_invalid_form(self):
 
 class StudentViewsTest(TestCase):
       def setUp(self):
+            """
+            Setup method to initialize the test client and create a student object.
+            """
             self.client = Client()
             self.student = Student.objects.create(name='Test Student')
 
       def test_studentinfo_get_request(self):
+        """
+        Test case to verify that the student info view returns a status code of 200, uses the correct template, and provides the correct student object in the context.
+        """
         
         response = self.client.get(reverse('student_info', args=[self.student.id]))
 
