@@ -1,13 +1,17 @@
 from django.test import TestCase
-
-# Create your tests here.
 from .models import Department
 from .views import department_info
 
 class DepartmentModelTest(TestCase):
+    """
+    Test cases for the Department model.
+    """
 
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for Department model tests.
+        """
         cls.department = Department.objects.create(
             name="Marketing",
             location="Block B",
@@ -19,7 +23,7 @@ class DepartmentModelTest(TestCase):
 
     def test_department_creation(self):
         """
-        Tests that a department object can be created successfully with valid data.
+        Tests the creation of a department object with valid data.
         """
         department = Department.objects.create(
             name="Sales",
@@ -38,15 +42,20 @@ class DepartmentModelTest(TestCase):
 
     def test_department_string_representation(self):
         """
-        Tests that the `__str__` method returns a meaningful string representation
-        of the department object.
+        Tests the string representation of the department object.
         """
         self.assertEqual(str(self.department), "Marketing")
 
 class DepartmentInfoViewTest(TestCase):
+    """
+    Test cases for the Department info view.
+    """
 
     @classmethod
     def setUpTestData(cls):
+        """
+        Set up test data for Department info view tests.
+        """
         cls.department = Department.objects.create(
             name="IT",
             location="Block D",
@@ -58,7 +67,7 @@ class DepartmentInfoViewTest(TestCase):
 
     def test_department_info_view_successful_response(self):
         """
-        Tests that the `department_info` view returns a successful HTTP response
+        Tests that the department info view returns a successful HTTP response
         with the correct context for a valid department ID.
         """
         response = self.client.get(f"/department_info/{self.department.pk}/")
@@ -70,7 +79,7 @@ class DepartmentInfoViewTest(TestCase):
     
     def test_department_info_view_404_for_invalid_id(self):
         """
-        Tests that the `department_info` view returns a 404 Not Found status code
+        Tests that the department info view returns a 404 Not Found status code
         for an invalid department ID.
         """
         response = self.client.get("/department/999/")
@@ -78,7 +87,7 @@ class DepartmentInfoViewTest(TestCase):
 
     def test_department_info_view_template_used(self):
         """
-        Tests that the `department_info` view renders the expected template.
+        Tests that the department info view renders the expected template.
         """
         response = self.client.get(f"/department_info/{self.department.pk}/")
         self.assertTemplateUsed(response, "base/department_info.html")
