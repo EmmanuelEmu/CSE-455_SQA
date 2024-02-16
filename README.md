@@ -1,1 +1,1 @@
-This part create a department
+View a specific department information

@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     'base.apps.BaseConfig',
     'django_filters',
-    'base.apps.BaseConfig'
 ]
 
 MIDDLEWARE = [
