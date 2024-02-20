@@ -55,7 +55,15 @@ def home(request):
     Returns:
         HttpResponse: Rendered home page.
     """
-    return render(request,'base/home.html')
+    std=Student.objects.all().order_by('-id')
+    regular_std=Student.objects.filter(status='Regular').order_by('-id')[:10]
+    #all_teacher=Teacher.objects.all()
+    top_10_dept=Department.objects.order_by('-id')[:10]
+    #total_teacher=all_teacher.count()
+    total_std=std.count()
+    #total_dept=all_dept.count()
+    context={'std':std,'regular_std':regular_std,'total_std':total_std,'top_10_dept':top_10_dept}
+    return render( request,'base/home.html',context)
 
 def common_page(request):
     """

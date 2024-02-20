@@ -1,26 +1,13 @@
-<!--
-Home Page
-
-This HTML document represents the home page.
-
-
--->
-
-{% extends 'main.html' %} 
-
+{% extends 'main.html' %}
 
 {%block content%}
 
-<br>
-
- <br>
- <div class="row">
+<h1>{{total_std}}</H1>
 
 
-       <div class="col-md-5">
-        
-          <hr>
-          <div class="card card_body">
+
+
+<div class="card card_body">
               <a class ="btn btn-primary btn-sm btn-block" href=""><h3>Top Ten Departments</h3></a>
               <table class="table table-sm"style="font-size:17px;">
                   <tr>
@@ -29,6 +16,7 @@ This HTML document represents the home page.
                        <th>Dept Rank</th>
                        <th>Details</th>
                        <th>Update</th>
+                       <th>Delete</th>
 
                   </tr>
 
@@ -37,9 +25,9 @@ This HTML document represents the home page.
                            <td>{{top_10_dept.id}}</td>
                            <td>{{top_10_dept.name}}</td>
                            <td>{{top_10_dept.rank}}</td>
-                           <td><a class="btn btn-primary btn-sm" href="">View</a></td>
-                           <td><a class="btn btn-warning btn-sm" href="">Update</a></td> 
- 
+                           <td><a class="btn btn-primary btn-sm" href="{% url 'department_info' top_10_dept.id %}">View</a></td>
+                           <td><a class="btn btn-warning btn-sm" href="{% url 'update_department' top_10_dept.id %}">Update</a></td> 
+                           <td><a class="btn btn-danger btn-sm"  href="{% url 'delete_department' top_10_dept.id %}">Delete</a></td>
                         </tr>     
                   {%endfor%}
    
@@ -47,14 +35,12 @@ This HTML document represents the home page.
                 </table>
           </div>
 
-         
-        </div>
 
 
 
-        <div class="col-md-7">
-          <hr>
-          <div class="card card_body">
+
+
+<div class="card card_body">
               <a class ="btn btn-primary btn-sm btn-block" href=""><h3>Latest Ten Students</h3></a>
               <table class="table table-sm" style="font-size:17px;">
                   <tr>
@@ -64,7 +50,7 @@ This HTML document represents the home page.
                        <th>Session</th>
                        <th>Details</th>
                        <th>Update</th>
-                       
+                       <th>Delete</th>
                   </tr>
                   {%for std in std%}
                         <tr>
@@ -72,9 +58,10 @@ This HTML document represents the home page.
                            <td>{{std.name}}</td>
                            <td>{{std.reg_no}}</td>
                            <td>{{std.session}}</td>
-                           <td><a class="btn btn-primary btn-sm" href="">View</a></td>
-                           <td><a class="btn btn-warning btn-sm" href="">Update</a></td>
-                           
+                           <td><a class="btn btn-primary btn-sm" href="{% url 'student_info' std.id %}">View</a></td>
+                           <td><a class="btn btn-warning btn-sm" href="{% url 'update_student' std.id %}">Update</a></td>
+                           <td><a class="btn btn-danger btn-sm"  href="{% url 'delete_student' std.id %}">Delete</a></td>
+                          
                         </tr>     
                   {%endfor%}
 
@@ -84,11 +71,4 @@ This HTML document represents the home page.
                 </table>
           </div>
 
-         
-        </div>
-       
-    </div>
-
-<h1></h1>
-
-{%endblock%}
+{% endblock content %}
