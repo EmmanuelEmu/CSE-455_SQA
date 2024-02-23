@@ -52,6 +52,7 @@ urlpatterns = [
    
     path('create_teacher/',views.create_teacher,name="create_teacher"),
     path('teacher_info/<str:pk>/',views.teacher_info,name="teacher_info"),
+    path('update_teacher/<str:pk>/',views.update_teacher,name="update_teacher"),
     
     
     

@@ -42,6 +42,19 @@ def teacher_info(request,pk):
     context={'teacher':teacher}
     return render(request, 'base/teacher_info.html',context)
 
+
+
+def update_teacher(request, pk):
+    teacher = get_object_or_404(Teacher, id=pk)
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TeacherForm(instance=teacher)
+    return render(request, 'base/create_teacher.html', {'form': form})
+
 def register(request):
     if request.user.is_authenticated:
         return redirect('home')
