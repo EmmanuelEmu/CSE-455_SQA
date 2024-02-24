@@ -41,7 +41,19 @@ class TestUrls(SimpleTestCase):
         url = reverse('student_info', args=['1']) 
         self.assertEqual(resolve(url).func, views.studentinfo)
 
+class TestUpdateTeacherURL(TestCase):
+    def test_update_teacher_url_resolves(self):
+        # Define the URL with a sample primary key
+        url = reverse('update_teacher', kwargs={'pk': 'sample_pk'})
 
+        # Use resolve to get the resolved view function
+        resolved_view = resolve(url)
+
+        # Assert that the resolved view function matches the expected view function
+        self.assertEqual(resolved_view.func, views.update_teacher)
+
+        # Assert that the 'pk' parameter is passed correctly to the view function
+        self.assertEqual(resolved_view.kwargs['pk'], 'sample_pk')
 
 class UrlsTestCase(TestCase):
     """

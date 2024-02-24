@@ -125,6 +125,45 @@ def home(request):
     return render( request,'base/home.html',context)
 
 
+def create_teacher(request):
+    if request.method == 'POST':
+        form = TeacherForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TeacherForm()
+    return render(request, 'base/create_teacher.html', {'form': form})
+
+""" This is the views section for teacher info viewing"""
+def teacher_info(request,pk):
+    
+    """
+    View function to display information about a specific teacher.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        pk (int): The primary key of the teacher to display information about.
+
+    Returns:
+        HttpResponse: A response displaying information about the teacher.
+    """
+    teacher=Teacher.objects.get(id=pk)
+    context={'teacher':teacher}
+    return render(request, 'base/teacher_info.html',context)
+
+
+
+def update_teacher(request, pk):
+    teacher = get_object_or_404(Teacher, id=pk)
+    if request.method == 'POST':
+        form = TeacherForm(request.POST, instance=teacher)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = TeacherForm(instance=teacher)
+    return render(request, 'base/create_teacher.html', {'form': form})
 
 def create_student(request):
     if request.method == 'POST':
