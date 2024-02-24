@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from base.models import AdminNotice  # Replace 'yourapp' with the actual name of your Django app
 
 
+
 class TestUrls(SimpleTestCase):
 
     def test_create_teacher_url_resolves(self):
@@ -34,12 +35,25 @@ class TestUrls(SimpleTestCase):
         self.assertEqual(resolve(url).func, views.common_page)
 
     def test_create_student_url_resolves(self):
+        """
+        Test case to verify that the 'create_student' URL resolves to the correct view function.
+        """
         url = reverse('create_student')
         self.assertEqual(resolve(url).func, views.create_student)
 
     def test_student_info_url_resolves(self):
+        """
+        Test case to verify that the 'student_info' URL with an argument resolves to the correct view function.
+        """
         url = reverse('student_info', args=['1']) 
         self.assertEqual(resolve(url).func, views.studentinfo)
+
+    def test_update_student_url_resolves(self):
+        """
+        Test if the update_student URL resolves correctly.
+        """
+        url = reverse('update_student', kwargs={'pk': '1'})
+        self.assertEqual(url, '/update_student/1/')
 
 class TestUpdateTeacherURL(TestCase):
     def test_update_teacher_url_resolves(self):

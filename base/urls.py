@@ -50,6 +50,7 @@ urlpatterns = [
 
    path('student_info/<str:pk>/',views.studentinfo,name="student_info"),
    path('create_student/',views.create_student,name="create_student"),
+   path('update_student/<str:pk>/',views.update_student,name="update_student"),
    path('delete_student/<str:pk>/',views.delete_student,name="delete_student"),
     path('create_teacher/',views.create_teacher,name="create_teacher"),
     path('teacher_info/<str:pk>/',views.teacher_info,name="teacher_info"),
