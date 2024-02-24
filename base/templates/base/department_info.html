@@ -1,0 +1,74 @@
+<!--
+     
+HTML Template Documentation
+===========================
+
+This document provides documentation for the HTML template used to display department information
+-->
+
+{% extends 'main.html' %}
+{%block content%}
+<div class="container-fluid" style="text-align:center;margin:0px;width:100%;padding:0px ">
+ 
+  <div class="card border border-white" style="background-color: rgb(187, 219, 248);">
+    <div class="card-body">
+        <h1>Department of</h1>
+        <h1>{{dept.name}}</h1>
+        <h3 style ="color:rgb(15, 124, 151);">(Department Rank : {{dept.rank}})</h3>  
+    </div>
+  </div>
+
+</div>
+
+<div class="container-fluid" style="text-align:center;margin:0px;width:100%;padding:0px; background-color: rgb(234, 241, 248);">
+ 
+
+ <div class="row" style="padding:10px; padding-top:30px;">
+
+      <div class="col">
+           <div class="col-md">
+                <div class="card text-center text-dark mb-3" id="ESTD"> 
+                      <div class="card-header">
+                           <h5 class="card-title">Adding Date</h5>
+                      </div>
+                      <div class="card-body">
+                           <h3 class="card-header">{{dept.date_created}}</h3>
+                      </div> 
+                </div>
+           </div>
+      </div>
+
+ </div>
+
+</div>
+
+
+<br>
+<br>
+
+<div class="row" style="padding:10px; padding-top:30px;">
+      <div class="col">
+           <div class="col-md">
+                <div class="card text-center text-primary mb-3" id="CI"> 
+                      <div class="card-header">
+                           <h2 class="card-title">Contact Information</h2>
+                      </div>
+                      <div class="card-body">
+                           <h4 class="text-dark">Email : {{dept.email}}</h4>
+                           <h4 class="text-dark">Contact Number : {{dept.phone}}</h4>
+                           <h4 class="text-dark">Location : {{dept.location}}</h4>
+                      </div> 
+                </div>
+           </div>
+      </div>
+    </div>
+
+
+<br>
+<hr>
+<br>
+</tr class="card text-center">   
+    {% comment %} <td><a class="btn btn-primary btn-lg" style="margin-left:50px;" href="{% url 'department_info' dept.id %}">Update</a></td> {% comment %} 
+    {% comment %} <td><a class="btn btn-danger btn-lg" style="margin-left:20px;"  href="{% url 'department_info' dept.id %}">Delete</a></td> {% endcomment %}
+</tr> 
+{%endblock%}
