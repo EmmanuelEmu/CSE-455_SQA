@@ -33,7 +33,7 @@ def register(request):
     - request: HTTP request object.
 
     Returns:
-    - HttpResponse: Redirect to the login page(after successfull registration).
+    - HttpResponse: Redirect to the login page(after successful registration).
     """
     if request.user.is_authenticated:
         return redirect('home')
@@ -64,7 +64,7 @@ def login_admin(request):
     - request: HTTP request object.
 
     Returns:
-    - HttpResponse: Redirect to  home page(successfull).
+    - HttpResponse: Redirect to  home page(successful).
     """
 
     if request.user.is_authenticated:
@@ -166,7 +166,7 @@ def update_teacher(request, pk):
         form = TeacherForm(instance=teacher)
     return render(request, 'base/create_teacher.html', {'form': form})
 
-def studentinfo(request,pk):
+def student_info(request,pk):
     
     """
     Render the student information page.
@@ -446,3 +446,64 @@ def update_department(request, pk):
     context = {'form': form}
     return render(request, 'base/create_department.html', context)
 
+
+def create_notice(request):
+    """
+    View for creating an administrative notice.
+
+    Returns:
+        HttpResponse: Rendered create notice page.
+    """
+    if request.method == 'POST':
+        form = AdminNoticeForm(request.POST)
+        if form.is_valid():  
+           notice = form.save()
+           return redirect('home')
+    else:
+       form = AdminNoticeForm()
+
+    return render(request, 'base/create_notice.html', {'form': form})
+
+def update_notice(request, pk):
+    """
+    View function for updating an AdminNotice.
+
+    Parameters:
+        - request: HttpRequest object representing the incoming request.
+        - pk: Primary key of the AdminNotice to be updated.
+
+    Returns:
+        - If the request method is POST and the form is valid, the notice is updated, 
+          and the user is redirected to the 'home' page.
+        - If the request method is GET, the form is populated with the existing notice data.
+        - The rendered HTML page displaying the form for updating the AdminNotice.
+
+    Raises:
+        - Http404: If the specified AdminNotice with the given primary key does not exist.
+    """
+    notice = get_object_or_404(AdminNotice, id=pk)
+
+    if request.method == 'POST':
+        form = AdminNoticeForm(request.POST, instance=notice)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  
+    else:
+        form = AdminNoticeForm(instance=notice)
+
+    return render(request, 'base/create_notice.html', {'form': form})
+
+
+def notice_details(request,pk):
+    """
+    View for displaying details of a specific notice.
+
+    Args:
+        pk (str): Primary key of the notice.
+
+    Returns:
+        HttpResponse: Rendered notice details page.
+    """
+    notice = AdminNotice.objects.get(id=pk)
+    context={'notice': notice}
+    return render(request,'base/notice_details.html',context)

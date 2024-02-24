@@ -61,7 +61,7 @@ urlpatterns = [
    path('home/',views.home,name="home"),
 
 
-   path('student_info/<str:pk>/',views.studentinfo,name="student_info"),
+   path('student_info/<str:pk>/',views.student_info,name="student_info"),
    path('create_student/',views.create_student,name="create_student"),
    path('update_student/<str:pk>/',views.update_student,name="update_student"),
    path('delete_student/<str:pk>/',views.delete_student,name="delete_student"),
@@ -77,7 +77,11 @@ urlpatterns = [
    path('create_department/',views.create_department,name="create_department"),
    path('update_department/<str:pk>/',views.update_department,name="update_department"),
 
-
+   path('create_notice/',views.create_notice,name="create_notice"),
+   # URL for the update_notice view with a dynamic parameter 'pk'
+   path('update_notice/<str:pk>/',views.update_notice,name="update_notice"),
+   # URL for the notice_details view with a dynamic parameter 'pk'
+   path('notice_details/<str:pk>/',views.notice_details,name="notice_details"),
 
 
 ]
