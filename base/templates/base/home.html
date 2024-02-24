@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+
+
+{%block content%}
+
+<br>
+
+ <br>
+ <div class="row">
+
+
+       <div class="col-md-5">
+        
+          <hr>
+          <div class="card card_body">
+              <a class ="btn btn-primary btn-sm btn-block" href=""><h3>Top Ten Departments</h3></a>
+              <table class="table table-sm"style="font-size:17px;">
+                  <tr>
+                       <th>Dept ID</th>
+                       <th>Dept Name</th>
+                       <th>Dept Rank</th>
+                       <th>Details</th>
+                       <th>Update</th>
+
+                  </tr>
+
+                  
+   
+
+                </table>
+          </div>
+
+         
+        </div>
+
+
+
+        <div class="col-md-7">
+          <hr>
+          <div class="card card_body">
+              <a class ="btn btn-primary btn-sm btn-block" href=""><h3>Latest Ten Students</h3></a>
+              <table class="table table-sm" style="font-size:17px;">
+                  <tr>
+                       <th>Std ID</th>
+                       <th>Name</th>
+                       <th>REG No</th>
+                       <th>Session</th>
+
+                       
+                  </tr>
+                  {%for std in std%}
+                        <tr>
+                           <td>{{std.id}}</td>
+                           <td>{{std.name}}</td>
+                           <td>{{std.reg_no}}</td>
+                           <td>{{std.session}}</td>
+
+                           
+                        </tr>     
+                  {%endfor%}
+
+                  
+
+
+                </table>
+          </div>
+
+         
+        </div>
+       
+    </div>
+
+<h1></h1>
+
+{%endblock%}

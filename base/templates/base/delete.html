@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+{% load static%}
+{% block content %}
+
+<br>
+   {% if func == 'delete_dept' %}
+
+
+       <div class="col">
+           <div class="col-md">
+                <div class="card text-center text-white mb-3"> 
+                      <div class="card-header bg-dark" >
+                           <h2 class="card-title">Are you sure you want to delete "{{item.name}}"</h2>
+                      </div>
+                      <div class="card-body">
+                          <form action="{%url 'delete_department' item.id %}" method="POST">
+                              {%csrf_token%}
+                              <a class="btn btn-primary btn-lg" href="{%url 'home' %}">Cancel</a>
+                              &#160;&#160;
+                              <input class="btn btn-danger btn-lg"  type="submit" name="Confirm" value="Confirm">
+                          </form>
+                      </div> 
+                </div>
+           </div>
+      </div>
+
+
+   {% elif func == 'delete_std' %}
+
+
+      <div class="col">
+           <div class="col-md">
+                <div class="card text-center text-white mb-3"> 
+                      <div class="card-header bg-dark" >
+                           <h2 class="card-title">Are you sure you want to delete "{{item.name}}"</h2>
+                      </div>
+                      <div class="card-body">
+                          <form action="{%url 'delete_student' item.id %}" method="POST">
+                              {%csrf_token%}
+                              <a class="btn btn-primary btn-lg" href="{%url 'home' %}">Cancel</a>
+                              &#160;&#160;
+                              <input class="btn btn-danger btn-lg"  type="submit" name="Confirm" value="Confirm">
+                          </form>
+                      </div> 
+                </div>
+           </div>
+      </div>
+
+      
+ 
+
+    {% elif func == 'delete_teacher' %}
+
+
+          <div class="col">
+               <div class="col-md">
+                    <div class="card text-center text-white mb-3"> 
+                         <div class="card-header bg-dark" >
+                              <h2 class="card-title">Are you sure you want to delete "{{item.name}}"</h2>
+                         </div>
+                         <div class="card-body">
+                              <form action="{%url 'delete_teacher' item.id %}" method="POST">
+                                   {%csrf_token%}
+                                   <a class="btn btn-primary btn-lg" href="{%url 'home' %}">Cancel</a>
+                                   &#160;&#160;
+                                   <input class="btn btn-danger btn-lg"  type="submit" name="Confirm" value="Confirm">
+                              </form>
+                         </div> 
+                    </div>
+               </div>
+          </div>
+
+
+
+    {% elif func == 'delete_notice' %}
+
+
+          <div class="col">
+               <div class="col-md">
+                    <div class="card text-center text-white mb-3"> 
+                         <div class="card-header bg-dark" >
+                              <h2 class="card-title">Are you sure you want to delete "{{item.name}}"</h2>
+                         </div>
+                         <div class="card-body">
+                              <form action="{%url 'delete_notice' item.id %}" method="POST">
+                                   {%csrf_token%}
+                                   <a class="btn btn-primary btn-lg" href="{%url 'home' %}">Cancel</a>
+                                   &#160;&#160;
+                                   <input class="btn btn-danger btn-lg"  type="submit" name="Confirm" value="Confirm">
+                              </form>
+                         </div> 
+                    </div>
+               </div>
+          </div>
+
+ {% endif %}
+
+
+{%endblock%}
