@@ -12,8 +12,8 @@ urlpatterns = [
    path('home/',views.home,name="home"),
    # URL for the create_notice view
    path('create_notice/',views.create_notice,name="create_notice"),
-   #update notice url
+   # URL for the update_notice view with a dynamic parameter 'pk'
    path('update_notice/<str:pk>/',views.update_notice,name="update_notice"),
-    # URL for the notice_details view with a dynamic parameter 'pk'
+   # URL for the notice_details view with a dynamic parameter 'pk'
    path('notice_details/<str:pk>/',views.notice_details,name="notice_details"),
 ]

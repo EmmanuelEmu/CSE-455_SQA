@@ -99,6 +99,22 @@ def create_notice(request):
     return render(request, 'base/create_notice.html', {'form': form})
 
 def update_notice(request, pk):
+    """
+    View function for updating an AdminNotice.
+
+    Parameters:
+        - request: HttpRequest object representing the incoming request.
+        - pk: Primary key of the AdminNotice to be updated.
+
+    Returns:
+        - If the request method is POST and the form is valid, the notice is updated, 
+          and the user is redirected to the 'home' page.
+        - If the request method is GET, the form is populated with the existing notice data.
+        - The rendered HTML page displaying the form for updating the AdminNotice.
+
+    Raises:
+        - Http404: If the specified AdminNotice with the given primary key does not exist.
+    """
     notice = get_object_or_404(AdminNotice, id=pk)
 
     if request.method == 'POST':
