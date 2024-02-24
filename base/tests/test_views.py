@@ -202,70 +202,96 @@ class CreateNoticeViewTest(TestCase):
         self.assertEqual(AdminNotice.objects.count(), 0)
 
 
-class UpdateNoticeViewTest(TestCase):
-    """
-    Test case for the 'create_notice' view in the 'base' app.
+# class UpdateNoticeViewTest(TestCase):
+#     """
+#     Test case for the 'create_notice' view in the 'base' app.
 
-    This test case checks the behavior of the 'create_notice' view with valid and invalid form data.
-    """
+#     This test case checks the behavior of the 'create_notice' view with valid and invalid form data.
+#     """
+#     def setUp(self):
+#         """
+#         Set up necessary data for the test case.
+#         """
+#         self.client = Client()
+
+#     def test_update_notice_view(self):
+#         """
+#         Test the 'create_notice' view with valid form data.
+
+#         This test makes a POST request with valid form data, checks if the response redirects to the 'home' page,
+#         and verifies that a notice was created in the database.
+#         """
+#         # Define the URL for the create_notice view
+#         url = reverse('create_notice')
+
+#         # Make a POST request with valid form data
+#         data = {
+#             'sender': 'Admin',
+#             'receiver': 'JohnDoe',
+#             'subject': 'Test Subject',
+#             'body': 'Test Body',
+#         }
+#         response = self.client.post(url, data)
+
+#         # Check if the response redirects to the 'home' page
+#         self.assertRedirects(response, reverse('home'))
+
+#         # Check if a notice was created in the database
+#         self.assertEqual(AdminNotice.objects.count(), 1)
+
+#         # Optionally, you can check other details about the created notice
+
+#     def test_update_notice_view_invalid_form(self):
+#         """
+#         Test the 'create_notice' view with invalid form data.
+
+#         This test makes a POST request with invalid form data, checks if the response renders the 'create_notice' template,
+#         and ensures that the form in the context is an instance of AdminNoticeForm.
+#         """
+#         # Define the URL for the create_notice view
+#         url = reverse('create_notice')
+
+#         # Make a POST request with invalid form data
+#         data = {
+#             # Missing required fields
+#         }
+#         response = self.client.post(url, data)
+
+#         # Check if the response renders the create_notice template
+#         self.assertTemplateUsed(response, 'base/create_notice.html')
+
+#         # Check if the form in the context is an instance of AdminNoticeForm
+#         self.assertIsInstance(response.context['form'], AdminNoticeForm)
+
+#         # Check if the notice count in the database remains unchanged
+#         self.assertEqual(AdminNotice.objects.count(), 0)
+
+
+
+
+
+class AdminNoticeViewTests(TestCase):
     def setUp(self):
+        # Create a test user (optional)
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+
+        # Create a test notice
+        self.notice = AdminNotice.objects.create(sender='Admin', receiver='Sizan')
+
+    def test_update_notice_view_get(self):
         """
-        Set up necessary data for the test case.
+        Test that the update_notice view returns a form for updating an existing notice (GET request).
         """
-        self.client = Client()
+        self.client.login(username='testuser', password='testpassword')  # If authentication is required
+        url = reverse('update_notice', args=[self.notice.id])
+        response = self.client.get(url)
 
-    def test_update_notice_view(self):
-        """
-        Test the 'create_notice' view with valid form data.
-
-        This test makes a POST request with valid form data, checks if the response redirects to the 'home' page,
-        and verifies that a notice was created in the database.
-        """
-        # Define the URL for the create_notice view
-        url = reverse('create_notice')
-
-        # Make a POST request with valid form data
-        data = {
-            'sender': 'Admin',
-            'receiver': 'JohnDoe',
-            'subject': 'Test Subject',
-            'body': 'Test Body',
-        }
-        response = self.client.post(url, data)
-
-        # Check if the response redirects to the 'home' page
-        self.assertRedirects(response, reverse('home'))
-
-        # Check if a notice was created in the database
-        self.assertEqual(AdminNotice.objects.count(), 1)
-
-        # Optionally, you can check other details about the created notice
-
-    def test_update_notice_view_invalid_form(self):
-        """
-        Test the 'create_notice' view with invalid form data.
-
-        This test makes a POST request with invalid form data, checks if the response renders the 'create_notice' template,
-        and ensures that the form in the context is an instance of AdminNoticeForm.
-        """
-        # Define the URL for the create_notice view
-        url = reverse('create_notice')
-
-        # Make a POST request with invalid form data
-        data = {
-            # Missing required fields
-        }
-        response = self.client.post(url, data)
-
-        # Check if the response renders the create_notice template
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'base/create_notice.html')
-
-        # Check if the form in the context is an instance of AdminNoticeForm
         self.assertIsInstance(response.context['form'], AdminNoticeForm)
+        self.assertEqual(response.context['form'].instance, self.notice)
 
-        # Check if the notice count in the database remains unchanged
-        self.assertEqual(AdminNotice.objects.count(), 0)
-
+    
 
 
 class NoticeDetailsViewTest(TestCase):
@@ -326,3 +352,18 @@ class NoticeDetailsViewTest(TestCase):
             self.client.get(url)
 
     # No need to access the response variable here, as it's not expected to be defined
+
+class HomeViewTest(TestCase):
+    def test_home_view_status_code(self):
+        """
+        Test if the home view returns a status code of 200 (OK).
+        """
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_home_view_template(self):
+        """
+        Test if the home view uses the correct template.
+        """
+        response = self.client.get(reverse('home'))
+        self.assertTemplateUsed(response, 'base/home.html')
