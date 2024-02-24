@@ -1,78 +1,57 @@
 import django_filters
-from django_filters import DateFilter, CharFilter, NumberFilter
+from django_filters import CharFilter, NumberFilter
 from .models import *
 
 from django import forms
 
 
 
-class DepartmentFilter(django_filters.FilterSet):
-    id = NumberFilter(field_name='id')
-    name = CharFilter(field_name='name', lookup_expr='icontains', label='Dept Name')
-    location = CharFilter(field_name='location', lookup_expr='icontains', widget=forms.Select(choices=[('', 'All Blocks')] + list(Department.LOCATION)))
-    rank = NumberFilter(field_name='rank')
-    phone = CharFilter(field_name='phone',lookup_expr='icontains')
-    email = CharFilter(field_name='email',lookup_expr='icontains')
+
+class StudentFilter(django_filters.FilterSet):
+    """
+    Filter class for the Student model.
+
+    Inherits from:
+    - django_filters.FilterSet: Django's built-in class for creating filters on querysets.
+
+    Attributes:
+    - id: Filter for the 'id' field with label 'ID'.
+    - name: Case-insensitive filter for the 'name' field with label 'Name'.
+    - roll: Filter for the 'roll' field.
+    - CGPA_gt: Filter for 'CGPA' field, filtering for values greater than a specified value.
+    - status: Filter for the 'status' field with choices provided as a dropdown.
+
+
+    Django Models:
+    - Student: The Django model representing student information.
+
+    Dependencies:
+    - Django must be properly installed in the project.
+    - django_filters.FilterSet class should be imported from 'django_filters'.
+    - Student model should be imported from the appropriate module.
+
+
+    Notes:
+    The filter class provides filters for various fields of the Student model,
+    allowing for easy and customizable queryset filtering.
+
+    """
+    id = django_filters.NumberFilter(field_name='id', label='ID')
+    name = django_filters.CharFilter(field_name='name', lookup_expr='icontains', label='Name')
+    roll = django_filters.CharFilter(field_name='roll')
+
+    CGPA_gt = django_filters.NumberFilter(field_name='CGPA', lookup_expr='gt', label='CGPA greater than')
+    status = CharFilter(field_name='status', lookup_expr='icontains', widget=forms.Select(choices=[('', 'Status')] + list(Student.STATUS)))
 
     class Meta:
-        model = Department
-        fields = ['id', 'name', 'location', 'rank', 'phone', 'email']
-        exclude = ['date_created', 'description']
+        """
+        Metadata class for StudentFilter.
 
+        Attributes:
+        - model: The Student model to which the filter is associated.
+        - fields: The fields to include in the filter.
 
+        """
+        model = Student
+        fields = ['id', 'name', 'roll', 'CGPA_gt', 'status']
 
-class TeacherFilter(django_filters.FilterSet):
-    """
-    FilterSet for filtering instances of the Teacher model.
-
-    This FilterSet provides filters for querying instances of the Teacher model
-    based on various fields such as ID, name, registration number, rank, and department.
-
-    Example usage:
-
-    .. code-block:: python
-
-        # Create a filter instance
-        filter = TeacherFilter(request.GET, queryset=Teacher.objects.all())
-
-        # Apply filters
-        filtered_teachers = filter.qs
-
-    For more information on working with Django Filter, see:
-    https://django-filter.readthedocs.io/en/stable/
-
-    """
-    id = django_filters.NumberFilter(field_name='id',label='ID')
-    """
-    Filter for filtering by ID.
-
-    :param int id: The ID to filter by.
-    """
-    name = django_filters.CharFilter(lookup_expr='icontains',label='Name')
-    """
-    Filter for filtering by name.
-
-    :param str name: The name to filter by.
-    """
-    reg_no = django_filters.CharFilter(lookup_expr='icontains',label='Reg No')
-    """
-    Filter for filtering by registration number.
-
-    :param str reg_no: The registration number to filter by.
-    """
-    rank = django_filters.ChoiceFilter(choices=Teacher.RANK,label='Rank')
-    """
-    Filter for filtering by rank.
-
-    :param str rank: The rank to filter by.
-    """
-    dept = django_filters.ModelChoiceFilter(queryset=Department.objects.all(),label='Department')
-    """
-    Filter for filtering by department.
-
-    :param Department dept: The department to filter by.
-    """
-
-    class Meta:
-        model = Teacher
-        fields = ['name', 'reg_no', 'rank', 'dept']

@@ -1,0 +1,99 @@
+{% extends 'main.html' %}
+
+
+{%block content%}
+
+<style>
+    #header {
+        background-color: aliceblue;
+        min-height: 100px;  /* Set your desired height here */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<div class="container-sm" id="header">
+    <h2>Total Number of {{title}}</h2>
+</div>
+
+<div class="container-sm" id="header">
+    <h1>{{total_std}}</h1>
+</div>
+
+
+<div class="col-md">
+          <hr>
+          <div class="card card_body" style="font-size:">
+
+
+               <form method="get">
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            {{ myFilter.form.id.label_tag }}
+                            <br>
+                            {{ myFilter.form.id }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ myFilter.form.name.label_tag }}<br>
+                            {{ myFilter.form.name }}
+                        </div>
+
+                        <div class="form-group col-md-2">
+                            {{ myFilter.form.dept.label_tag }}<br>
+                            {{ myFilter.form.dept }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            {{ myFilter.form.CGPA_gt.label_tag }}<br>
+                            {{ myFilter.form.CGPA_gt }}
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="{{ myFilter.form.status.label }}" class="form-label">{{ myFilter.form.status.label }}</label><br>
+                            {{ myFilter.form.status }}
+                        </div>
+                        <div class="form-group col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+
+
+              <div class ="btn-primary btn-lg btn-block" style="text-align:center;"><h2>All Student(After Search Performed) {{text}}</h2></div>
+              <table class="table table-sm">
+                  <tr>
+                       <th>Std ID</th>
+                       <th>Name</th>
+
+                       <th>Roll</th>
+                       <th>Session</th>
+                       <th>Details</th>
+                       <th>Delete</th>
+                  </tr>
+                  {%for student in students%}
+                        <tr>
+                           <td>{{student.id}}</td>
+                           <td>{{student.name}}</td>
+ 
+                           <td>{{student.roll}}</td>
+                           <td>{{student.session}}</td>
+                           <td><a class="btn btn-primary btn-sm" href="{% url 'student_info' student.id %}">View</a></td>
+                           <td><a class="btn btn-danger btn-sm" href="{% url 'delete_student' student.id %}">Delete</a></td>
+
+                        </tr>     
+                  {%endfor%}
+
+                </table>
+         </div>    
+</div>
+
+         
+    
+       
+    </div>
+
+
+{%endblock%}

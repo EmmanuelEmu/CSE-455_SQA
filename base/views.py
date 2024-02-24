@@ -1,129 +1,38 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
-from base.models import *
-from base.forms import *
-from base.filters import *
-from base.forms import *
-from base.filters import *
+from .models import *
+from .forms import *
+from .filters import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import authenticate,login,logout
 
-'''
-create_department
------------------
 
-.. function:: create_department(request)
-
-   View function to create a new department.
-
-   This function handles both GET and POST requests. For GET requests,
-   it renders a form to create a new department. For POST requests,
-   it validates the form data and saves the new department if the form
-   is valid.
-
-   :param request: The HTTP request object.
-   :type request: HttpRequest
-   :return: A response to the request.
-   :rtype: HttpResponse
-'''
-
-'''
-department_info(request, pk)
-----------------------------
-
-View function to retrieve and display department information.
-
-Args:
-    request (HttpRequest): An object representing the request.
-    pk (int): The primary key of the department to retrieve.
-
-Returns:
-    HttpResponse: A rendered HTML response displaying department information.
-
-Raises:
-    Department.DoesNotExist: If the department with the given primary key does not exist.
-
-'''
-
-
-def home(request):
-    """
-    View for rendering the home page.
-
-    Returns:
-        HttpResponse: Rendered home page.
-    """
-    std=Student.objects.all().order_by('-id')
-    regular_std=Student.objects.filter(status='Regular').order_by('-id')[:10]
-    #all_teacher=Teacher.objects.all()
-    top_10_dept=Department.objects.order_by('-id')[:10]
-    #total_teacher=all_teacher.count()
-    total_std=std.count()
-    #total_dept=all_dept.count()
-    context={'std':std,'regular_std':regular_std,'total_std':total_std,'top_10_dept':top_10_dept}
-    return render( request,'base/home.html',context)
 
 def common_page(request):
     """
     View for rendering the common page.
 
+    Parameters:
+    - request: HTTP request object.
+
     Returns:
-        HttpResponse: Rendered common page.
+    - HttpResponse: Rendered response for the common page.
     """
     return render(request,'base/common_page.html')
 
-
-
-def create_teacher(request):
-    """
-    View function for creating a new teacher.
-
-    This view function handles both GET and POST requests. When a GET request is received,
-    it initializes a new instance of the TeacherForm. When a POST request is received with
-    valid form data, it saves the form data to create a new teacher instance and redirects
-    the user to the 'home' page.
-
-    :param HttpRequest request: The HTTP request object.
-    :returns: A redirect response to the 'home' page if form submission is successful,
-              otherwise, a rendered HTML template displaying the form.
-    :rtype: HttpResponseRedirect or HttpResponse
-
-    """
-    if request.method == 'POST':
-        form = TeacherForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    else:
-        form = TeacherForm()
-    return render(request, 'base/create_teacher.html', {'form': form})
-
-""" This is the views section for teacher info viewing"""
-def teacher_info(request,pk):
-    
-    """
-    View function to display information about a specific teacher.
-
-    Args:
-        request (HttpRequest): The HTTP request object.
-        pk (int): The primary key of the teacher to display information about.
-
-    Returns:
-        HttpResponse: A response displaying information about the teacher.
-    """
-    teacher=Teacher.objects.get(id=pk)
-    context={'teacher':teacher}
-    return render(request, 'base/teacher_info.html',context)
 
 
 def register(request):
     """
     View for user registration.
 
+    Parameters:
+    - request: HTTP request object.
+
     Returns:
-        HttpResponse: Rendered registration page.
+    - HttpResponse: Redirect to the login page(after successfull registration).
     """
     if request.user.is_authenticated:
         return redirect('home')
@@ -144,55 +53,19 @@ def register(request):
 
 
 
-def create_department(request):
-    """
-    View function to create a new department.
 
-    This function handles both GET and POST requests. For GET requests,
-    it renders a form to create a new department. For POST requests,
-    it validates the form data and saves the new department if the form
-    is valid.
-
-    Parameters:
-    - request (HttpRequest): The HTTP request object.
-
-    Returns:
-    - HttpResponse: A response to the request. 
-    """
-    if request.method == 'POST':
-        form = DepartmentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-            return redirect('create_department')
-    else:
-        form = DepartmentForm()
-    return render(request, 'base/create_department.html', {'form': form})
-
-def department_info(request, pk):
-    """
-    View function to retrieve and display department information.
-
-    Args:
-        request: HttpRequest object representing the request.
-        pk: Primary key of the department to retrieve.
-
-    Returns:
-        HttpResponse: Rendered HTML response displaying department information.
-
-    Raises:
-        Department.DoesNotExist: If the department with the given primary key does not exist.
-    """
-    dept = Department.objects.get(id=pk)
-    context = {'dept': dept}
-    return render(request, 'base/department_info.html', context)
 
 def login_admin(request):
     """
-    View for user login.
+    View for administrator login.
+
+    Parameters:
+    - request: HTTP request object.
+
     Returns:
-        HttpResponse: Rendered login page.
-     """
+    - HttpResponse: Redirect to  home page(successfull).
+    """
+
     if request.user.is_authenticated:
         return redirect('home')
 
@@ -213,112 +86,151 @@ def login_admin(request):
 
 
 
+
+
 def logout_user(request):
+    """
+    View for user logout.
+
+    Parameters:
+    - request: HTTP request object.
+
+    Returns:
+    - HttpResponse: Redirects to the login page after user logout.
+    """
     logout(request)
     return redirect('login')
-    """
-    Render the common page.
-
-    Args:
-        request: HttpRequest object.
-
-    Returns:
-        Rendered HttpResponse object.
-    """
-
-    return render(request,'base/common_page.html')
-    
-
-
-
-def studentinfo(request,pk):
-
-    """
-    Render the student information page.
-
-    Args:
-        request: HttpRequest object.
-        pk: Primary key of the student object.
-
-    Returns:
-        Rendered HttpResponse object.
-    """
-
-    student=Student.objects.get(id=pk)
-    context={'student':student}
-    return render(request,'base/student_info.html',context)
-    
-
-
-def create_student(request):
-    """
-    Render the form for creating a new student or process form submission.
-
-    Args:
-        request: HttpRequest object.
-
-    Returns:
-        Rendered HttpResponse object with the form or redirects to home page.
-    """
-    
-    if request.method == 'POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-            
-    else:
-        form = StudentForm()
-    return render(request, 'base/create_student.html', {'form': form})
-
-    
 
 
 
 
 def home(request):
-     
-    return render( request,'base/home.html')
-
     """
-    Render the home page.
+    View for rendering the home page.
 
-    Args:
-        request: HttpRequest object.
+    Parameters:
+    - request: HTTP request object.
 
     Returns:
-        Rendered HttpResponse object.
+    - HttpResponse: Rendered response for the home page.
     """
-     
-    return render( request,'base/home.html')
-def create_notice(request):
-    """
-    View for creating an administrative notice.
+    std=Student.objects.all().order_by('-id')
+    regular_std=Student.objects.filter(status='Regular').order_by('-id')[:10]
+    #all_teacher=Teacher.objects.all()
+    #top_10_dept=Department.objects.order_by('-id')[:10]
+    #total_teacher=all_teacher.count()
+    total_std=std.count()
+    #total_dept=all_dept.count()
+    context={'std':std,'regular_std':regular_std,'total_std':total_std}
+    return render( request,'base/home.html',context)
 
-    Returns:
-        HttpResponse: Rendered create notice page.
-    """
+
+
+def create_student(request):
     if request.method == 'POST':
-        form = AdminNoticeForm(request.POST)
-        if form.is_valid():  
-           notice = form.save()
-           return redirect('home')
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Student created successfully.')
+            return redirect('home')  
+        else:
+            messages.error(request, 'Error creating student. Please check the form.')
+
     else:
-       form = AdminNoticeForm()
+        form = StudentForm()
 
-    return render(request, 'base/create_notice.html', {'form': form})
+    return render(request, 'base/create_student.html', {'form': form})
 
 
-def notice_details(request,pk):
+
+def studentinfo(request,pk):
+    student=Student.objects.get(id=pk)
+    context={'student':student}
+    return render(request,'base/student_info.html',context)
+
+
+
+
+
+def nav_stu_list(request):
+
     """
-    View for displaying details of a specific notice.
+    Display a list of students with filtering options.
 
-    Args:
-        pk (str): Primary key of the notice.
+    Parameters:
+    - request (HttpRequest): The HTTP request object.
 
     Returns:
-        HttpResponse: Rendered notice details page.
+    HttpResponse: Rendered HTML page displaying the student list.
+
+    Usage:
+    This function is intended to be used as a Django view to display and filter a list of students.
+
+
+    Sphinx Tags:
+    - :param request: The HTTP request object.
+    - :return: Rendered HTML page displaying the student list.
+
+    Dependencies:
+    - Django must be properly installed in the project.
+    - StudentFilter class should be defined in the current module or imported.
+
+    Notes:
+    The function fetches all students from the database , order them by ID in descending order and applies filtering  based on the request
+    parameters using the StudentFilter, counts the total number of students and renders the result in the
+    'base/nav_stu_list.html' template.
+
     """
-    notice = AdminNotice.objects.get(id=pk)
-    context={'notice': notice}
-    return render(request,'base/notice_details.html',context)
+
+    students=Student.objects.all().order_by('-id')
+
+    myFilter=StudentFilter(request.GET, queryset=students)
+    students=myFilter.qs
+    total_std=students.count()
+
+    context={'myFilter':myFilter,'students':students,'total_std':total_std,'title': 'Students'}
+    return render(request,'base/nav_stu_list.html',context)
+
+
+
+
+
+def delete_student(request,pk):
+    """
+    Function to delete a student record.
+
+    Parameters:
+    - request (HttpRequest): The HTTP request object.
+    - pk (int): Primary key of the student record to be deleted.
+
+    Returns:
+    HttpResponse: Redirects to the 'home' view after successful deletion.
+
+    Usage:
+    This function is intended to be used as a Django view to delete a specific student record.
+
+    Sphinx Tags:
+    - :param request: The HTTP request object.
+    - :param pk: Primary key of the student record to be deleted.
+    - :return: Redirects to the 'home' view after successful deletion.
+
+
+    Dependencies:
+    - Django must be properly installed in the project.
+
+
+
+    Notes:
+    The function fetches the student record with the provided primary key, handles the deletion
+    upon receiving a POST request and redirects to the 'home' view after successful deletion.
+
+    """
+
+
+    item=Student.objects.get(id=pk)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('home')
+    context={'item':item,'func':'delete_std'}
+    return render(request,'base/delete.html',context)
+
