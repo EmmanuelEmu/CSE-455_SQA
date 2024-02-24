@@ -10,20 +10,20 @@ from base.views import create_student
 class TestCommonPageView(TestCase):
 
     def setUp(self):
+        """
+        Setup method to initialize the test client and common page URL.
+        """
         self.client = Client()
-        self.common_page_url = reverse('common_page')  # Replace 'common_page' with your actual URL name
+        self.common_page_url = reverse('common_page')
 
     def test_common_page_view(self):
-        # Simulate a GET request to the common_page view
+        """
+        Test case to verify that the common page view returns a status code of 200 and uses the correct template.
+        """
         response = self.client.get(self.common_page_url)
-
-        # Assert that the response status code is 200, indicating success
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the correct template is being used to render the response
         self.assertTemplateUsed(response, 'base/common_page.html')
 
-        # You can add more specific assertions here if needed
 
 
    
@@ -48,22 +48,25 @@ class StudentViewsTest(TestCase):
 class TestCreateStudentView(TestCase):
     
     def setUp(self):
+        """
+        Setup method to initialize the test client.
+        """
         self.client = Client()
 
     def test_create_student_view_get(self):
-        # Simulate a GET request to the create_student view
-        response = self.client.get(reverse('create_student'))
-
-        # Assert that the response status code is 200, indicating success
+        """
+        Test case to verify that the create student view returns a status code of 200 and uses the correct template for GET request.
+        """
+        response = self.client.get(reverse('create_student'))    
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the correct template is being used to render the response
         self.assertTemplateUsed(response, 'base/create_student.html')
 
-        # You can add more specific assertions here if needed
+
 
     def test_create_student_view_post_valid_form(self):
-        # Simulate a POST request to the create_student view with a valid form submission
+        """
+        Test case to verify that the create student view successfully creates a student object with valid form data.
+        """
         form_data = {
             'name': 'Ali ahmed',
             'hsc_roll': '12345',
@@ -82,12 +85,11 @@ class TestCreateStudentView(TestCase):
             'status': 'Regular',
             'CGPA': 3.5,
             'result_description': 'Good performance',
-            # Add other form fields as needed
         }
         response = self.client.post(reverse('create_student'), data=form_data)
         self.assertEqual(response.status_code, 302)
 
-        # Assert that the student was created in the database
+    
         self.assertTrue(Student.objects.filter(name='Ali ahmed').exists())
         self.assertTrue(Student.objects.filter(hsc_roll='12345').exists())
         self.assertTrue(Student.objects.filter(hsc_reg='43123').exists())
@@ -106,47 +108,68 @@ class TestCreateStudentView(TestCase):
         self.assertTrue(Student.objects.filter(CGPA=3.5).exists())
         self.assertTrue(Student.objects.filter(result_description='Good performance').exists())
 
-        # You can add more specific assertions here if needed
 
 
 
 class TestUpdateStudentView(TestCase):
+    """
+    Test case for the update_student view.
+
+    Methods:
+        setUp(self): Prepares the test environment before each test method is run.
+        test_update_student_view_get(self): Tests the GET request to the update_student view.
+        test_update_student_view_post_valid_form(self): Tests the POST request with valid form data.
+
+    """
     
     def setUp(self):
+        """
+        Set up the test environment.
+        
+        This method is called before each test method to set up any necessary preconditions.
+        It initializes the test client.
+        
+        """
         self.client = Client()
-        # Create a user for authentication purposes if needed
-        #self.user = User.objects.create_user(username='testuser', password='password123')
+        
 
     def test_update_student_view_get(self):
-        # Create a student instance for testing
+        """
+        Test the GET request to the update_student view.
+
+        Checks if the view returns a status code of 200 and uses the correct template.
+
+        """
         student = Student.objects.create(name='Test Student', hsc_roll='12345')
         
-        # Simulate a GET request to the update_student view
-        response = self.client.get(reverse('update_student', args=[student.pk]))
-
-        # Assert that the response status code is 200, indicating success
+        
+        response = self.client.get(reverse('update_student', args=[student.pk]))  
         self.assertEqual(response.status_code, 200)
-
-        # Assert that the correct template is being used to render the response
         self.assertTemplateUsed(response, 'base/create_student.html')
 
-        # You can add more specific assertions here if needed
+        
 
     def test_update_student_view_post_valid_form(self):
-        # Create a student instance for testing
+        """
+        Test the POST request with valid form data.
+
+        Checks if the view updates the student record correctly and redirects after a successful update.
+
+        """
+        
         student = Student.objects.create(name='Test Student', hsc_roll='12345')
 
-        # Simulate a POST request to the update_student view with a valid form submission
+        
         form_data = {
             'name': 'Ali Ahmed',
-            'hsc_roll': '12345',  # hsc_roll remains the same
+            'hsc_roll': '12345',  
             'hsc_reg': '43123',
             'reg_no': '4324456',
             'roll': '43789',
             'session': '2018-2019',
             'email': 'ali@gmail.com',
             'phone': '1234567890',
-            'dob': '2000-01-10',  # Use ISO format for dates
+            'dob': '2000-01-10',  
             'address': 'Dhaka',
             'fathers_name': 'Hasan Ali',
             'mothers_name': 'Afroza Khatun',
@@ -155,14 +178,12 @@ class TestUpdateStudentView(TestCase):
             'status': 'Regular',
             'CGPA': 3.5,
             'result_description': 'Good performance',
-            # Add other form fields as needed
+            
         }
         response = self.client.post(reverse('update_student', args=[student.pk]), data=form_data)
-        
-        # Assert that the response is a redirect (status code 302)
         self.assertEqual(response.status_code, 302)
 
-        # Assert that the student instance was updated in the database
+    
         updated_student = Student.objects.get(pk=student.pk)
         self.assertEqual(updated_student.name, 'Ali Ahmed')
         self.assertEqual(updated_student.hsc_reg, '43123')
@@ -180,3 +201,18 @@ class TestUpdateStudentView(TestCase):
         self.assertEqual(updated_student.status, 'Regular')
         self.assertEqual(updated_student.CGPA, 3.5)
         self.assertEqual(updated_student.result_description, 'Good performance')
+
+class HomeViewTest(TestCase):
+    def test_home_view_status_code(self):
+        """
+        Test if the home view returns a status code of 200 (OK).
+        """
+        response = self.client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_home_view_template(self):
+        """
+        Test if the home view uses the correct template.
+        """
+        response = self.client.get(reverse('home'))
+        self.assertTemplateUsed(response, 'base/home.html')

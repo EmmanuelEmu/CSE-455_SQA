@@ -2,6 +2,9 @@ from django.test import TestCase
 from base.models import Student
 
 class StudentModelTest(TestCase):
+    """
+        Test case to create a student instance and verify its attributes.
+    """
     def test_create_student(self):
         student = Student.objects.create(
             name="Rafi Kibria",

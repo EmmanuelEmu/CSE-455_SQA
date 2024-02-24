@@ -2,6 +2,9 @@ from django.test import TestCase
 from base.forms import StudentForm
 
 class StudentFormTestCase(TestCase):
+    """
+        Test case to check if the student form is valid with correct data.
+    """
     def test_student_form_valid(self):
         form_data = {
             'name': 'John Doe',
@@ -25,7 +28,11 @@ class StudentFormTestCase(TestCase):
 
         form = StudentForm(data=form_data)
         self.assertTrue(form.is_valid())
+
     def test_student_form_invalid(self):
+        """
+        Test case to check if the student form is invalid with incorrect data.
+        """
         form_data = {
             'name': 'John Doe',
             'hsc_roll': '123456',
@@ -42,7 +49,7 @@ class StudentFormTestCase(TestCase):
             'guardian_phone': '9876543210',
             'description': 'Lorem ipsum dolor sit amet',
             'status': 'Regular',
-            'CGPA': '5.0',  # Invalid CGPA
+            'CGPA': '5.0',  
             'result_description': 'Lorem ipsum dolor sit amet'
         }
 
