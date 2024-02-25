@@ -46,7 +46,7 @@ class TestUrls(SimpleTestCase):
         Test case to verify that the 'student_info' URL with an argument resolves to the correct view function.
         """
         url = reverse('student_info', args=['1']) 
-        self.assertEqual(resolve(url).func, views.studentinfo)
+        self.assertEqual(resolve(url).func, views.student_info)
 
     def test_update_student_url_resolves(self):
         """
