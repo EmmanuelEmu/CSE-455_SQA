@@ -20,7 +20,7 @@ class Student(models.Model):
     hsc_reg=models.CharField(max_length=16,null=True,unique=True)
     reg_no=models.CharField(max_length=16,null=True,unique=True,blank=True)
     roll=models.CharField(max_length=10,null=True,unique=True,blank=True)
-    #dept=models.ForeignKey(Department,null=True,on_delete=models.SET_NULL,blank=True)
+    # dept=models.ForeignKey(Department,null=True,on_delete=models.SET_NULL,blank=True)
     session=models.CharField(max_length=10,null=True)
     email=models.EmailField()
     phone=models.CharField(max_length=20,null=True)
