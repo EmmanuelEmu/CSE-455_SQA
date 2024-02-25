@@ -54,9 +54,9 @@ class StudentFilterTest(TestCase):
 
         """
         # Create some sample data for testing
-        self.student1 = Student.objects.create(id=1, name="John Doe", roll="001", CGPA_gt=3.7, status='Regular')
-        self.student2 = Student.objects.create(id=2, name="Jane Doe", roll="002", CGPA_gt=4.0, status='Ex-Student')
-        self.student3 = Student.objects.create(id=3, name="Bob Smith", roll="003", CGPA_gt=3.8, status='Regular')
+        self.student1 = Student.objects.create(id=1, name="John Doe", roll="001", CGPA=3.7, status='Regular')
+        self.student2 = Student.objects.create(id=2, name="Jane Doe", roll="002", CGPA=4.0, status='Ex-Student')
+        self.student3 = Student.objects.create(id=3, name="Bob Smith", roll="003", CGPA=3.8, status='Regular')
 
     def test_student_filter(self):
         """
