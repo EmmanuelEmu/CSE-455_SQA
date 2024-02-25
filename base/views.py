@@ -166,7 +166,7 @@ def update_teacher(request, pk):
         form = TeacherForm(instance=teacher)
     return render(request, 'base/create_teacher.html', {'form': form})
 
-def student_info(request,pk):
+def studentinfo(request,pk):
     
     """
     Render the student information page.
@@ -194,11 +194,13 @@ def create_student(request):
     Returns:
         Rendered HttpResponse object with the form or redirects to home page.
     """
+    
     if request.method == 'POST':
         form = StudentForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('home')
+            
     else:
         form = StudentForm()
     return render(request, 'base/create_student.html', {'form': form})
@@ -230,6 +232,7 @@ def update_student(request, pk):
         form = StudentForm(instance=student)
 
     return render(request, 'base/create_student.html', {'form': form, 'update_mode': True})
+
 
 
 
