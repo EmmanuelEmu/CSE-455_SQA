@@ -16,6 +16,9 @@ distlib==0.3.4
 distro==1.6.0
 Django
 django-filter
+django-advanced-filters
+six
+django-allauth==0.41.0
 django-crispy-forms==1.13.0
 django-debug-toolbar==3.2.3
 django-utils-six==2.0
