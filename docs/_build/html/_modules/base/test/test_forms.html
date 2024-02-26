@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.test.test_forms &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.test.test_forms</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.test.test_forms</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">DepartmentForm</span><span class="p">,</span> <span class="n">TeacherForm</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">Department</span><span class="p">,</span> <span class="n">Teacher</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">StudentForm</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">CreateUserForm</span><span class="p">,</span> <span class="n">AdminNoticeForm</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+
+
+<div class="viewcode-block" id="TestForms">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestForms">[docs]</a>
+<span class="k">class</span> <span class="nc">TestForms</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for form validation.</span>
+
+<span class="sd">    Inherits from:</span>
+<span class="sd">    - TestCase: Django&#39;s built-in test case class.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - test_create_user_form_valid_data: Method to test the validation of CreateUserForm with valid data.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">    This test case is designed to test the validation of forms focusing on the CreateUserForm.</span>
+
+<span class="sd">    </span>
+
+<span class="sd">    Dependencies:</span>
+<span class="sd">    - Django must be properly installed in the project.</span>
+<span class="sd">    - TestCase class should be imported from &#39;django.test&#39;.</span>
+<span class="sd">    - CreateUserForm class should be imported from the appropriate module.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    The test case includes a method to test the validation of CreateUserForm with valid data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="TestForms.test_create_user_form_valid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestForms.test_create_user_form_valid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_user_form_valid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the validation of CreateUserForm with valid data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create an instance of CreateUserForm with valid data</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CreateUserForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;TestPassword123!&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;TestPassword123!&#39;</span>
+        <span class="p">})</span>
+
+        <span class="c1"># Assert that the form is valid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+</div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: base.tests</span>
+<span class="sd">   :synopsis: Tests for the base app.</span>
+
+<span class="sd">TestDepartmentForm</span>
+<span class="sd">------------------</span>
+
+<span class="sd">.. autoclass:: base.tests.TestDepartmentForm</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :undoc-members:</span>
+<span class="sd">   :show-inheritance:</span>
+
+
+<span class="sd">   Unit tests for the DepartmentForm class.</span>
+
+<span class="sd">   This class contains test cases for validating the functionality of the DepartmentForm.</span>
+
+<span class="sd">   .. automethod:: test_valid_form</span>
+<span class="sd">   .. automethod:: test_invalid_form</span>
+<span class="sd">   .. automethod:: test_save_form</span>
+<span class="sd">   .. automethod:: test_update_form</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestDepartmentForm">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestDepartmentForm">[docs]</a>
+<span class="k">class</span> <span class="nc">TestDepartmentForm</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Unit tests for the DepartmentForm class.</span>
+
+<span class="sd">    This class contains test cases for validating the functionality of the DepartmentForm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestDepartmentForm.test_valid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestDepartmentForm.test_valid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_valid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if the form is valid when all required fields are provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="TestDepartmentForm.test_invalid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestDepartmentForm.test_invalid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_invalid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if form is invalid when required fields are missing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="TestDepartmentForm.test_save_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestDepartmentForm.test_save_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_save_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if form saves the data correctly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Test Department&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="s1">&#39;Block A&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">phone</span><span class="p">,</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">department</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;Test Description&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestDepartmentForm.test_update_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TestDepartmentForm.test_update_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if form updates the data correctly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Original Name&#39;</span><span class="p">,</span>
+            <span class="n">location</span><span class="o">=</span><span class="s1">&#39;Block B&#39;</span><span class="p">,</span>
+            <span class="n">rank</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">phone</span><span class="o">=</span><span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="n">email</span><span class="o">=</span><span class="s1">&#39;original@example.com&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Original Description&#39;</span>
+        <span class="p">)</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated Name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block C&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9999999999&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;updated@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated Description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">department</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span>
+        <span class="n">updated_department</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Updated Name&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="s1">&#39;Block C&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">phone</span><span class="p">,</span> <span class="s1">&#39;9999999999&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">&#39;updated@example.com&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;Updated Description&#39;</span><span class="p">)</span></div>
+</div>
+
+
+        
+
+<div class="viewcode-block" id="TeacherFormTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TeacherFormTest">[docs]</a>
+<span class="k">class</span> <span class="nc">TeacherFormTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TeacherFormTest.test_valid_teacher_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TeacherFormTest.test_valid_teacher_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_valid_teacher_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test valid TeacherForm&quot;&quot;&quot;</span>
+        <span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="n">location</span><span class="o">=</span><span class="s1">&#39;Block A&#39;</span><span class="p">,</span>
+            <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">phone</span><span class="o">=</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="n">email</span><span class="o">=</span><span class="s1">&#39;department@example.com&#39;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test department description&#39;</span>
+        <span class="p">)</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Teacher&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="s1">&#39;Lecturer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dept&#39;</span><span class="p">:</span> <span class="n">department</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;teacher@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test teacher description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="TeacherFormTest.test_invalid_teacher_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.TeacherFormTest.test_invalid_teacher_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_invalid_teacher_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test invalid TeacherForm&quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="StudentFormTestCase">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.StudentFormTestCase">[docs]</a>
+<span class="k">class</span> <span class="nc">StudentFormTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="StudentFormTestCase.test_student_form_valid">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.StudentFormTestCase.test_student_form_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_student_form_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_roll&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_reg&#39;</span><span class="p">:</span> <span class="s1">&#39;7890123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;ABCDE1234&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="s1">&#39;A12345&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;session&#39;</span><span class="p">:</span> <span class="s1">&#39;2022-2023&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dob&#39;</span><span class="p">:</span> <span class="s1">&#39;1990-01-01&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;123 Main St, City&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fathers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mothers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;guardian_phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;CGPA&#39;</span><span class="p">:</span> <span class="s1">&#39;3.5&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;result_description&#39;</span><span class="p">:</span> <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span>
+        <span class="p">}</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="StudentFormTestCase.test_student_form_invalid">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.StudentFormTestCase.test_student_form_invalid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_student_form_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;John Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_roll&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_reg&#39;</span><span class="p">:</span> <span class="s1">&#39;7890123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;ABCDE1234&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="s1">&#39;A12345&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;session&#39;</span><span class="p">:</span> <span class="s1">&#39;2022-2023&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;john.doe@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dob&#39;</span><span class="p">:</span> <span class="s1">&#39;1990-01-01&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;123 Main St, City&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fathers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Michael Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mothers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane Doe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;guardian_phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;CGPA&#39;</span><span class="p">:</span> <span class="s1">&#39;5.0&#39;</span><span class="p">,</span>  
+            <span class="s1">&#39;result_description&#39;</span><span class="p">:</span> <span class="s1">&#39;Lorem ipsum dolor sit amet&#39;</span>
+        <span class="p">}</span>
+
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+</div>
+
+    
+
+    
+
+
+
+<div class="viewcode-block" id="CreateUserFormTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.CreateUserFormTest">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateUserFormTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="CreateUserFormTest.test_create_user_form_valid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.CreateUserFormTest.test_create_user_form_valid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_user_form_valid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to check the validity of CreateUserForm with valid data.</span>
+
+<span class="sd">        This test checks if the form is valid when provided with valid user data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CreateUserForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;securepassword123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;securepassword123&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="CreateUserFormTest.test_create_user_form_invalid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.CreateUserFormTest.test_create_user_form_invalid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_user_form_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to check the validity of CreateUserForm with invalid data.</span>
+
+<span class="sd">        This test checks if the form is invalid when provided with invalid user data,</span>
+<span class="sd">        specifically an invalid email format.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">CreateUserForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;invalidemail&#39;</span><span class="p">,</span>  <span class="c1"># Invalid email format</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;password123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;password123&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+</div>
+
+
+<div class="viewcode-block" id="AdminNoticeFormTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.AdminNoticeFormTest">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminNoticeFormTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="AdminNoticeFormTest.test_admin_notice_form_valid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_valid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_admin_notice_form_valid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to check the validity of AdminNoticeForm with valid data.</span>
+
+<span class="sd">        This test checks if the form is valid when provided with valid notice data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;Admin&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;receiver&#39;</span><span class="p">:</span> <span class="s1">&#39;JohnDoe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Subject&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Body&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="AdminNoticeFormTest.test_admin_notice_form_invalid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_invalid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_admin_notice_form_invalid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to check the validity of AdminNoticeForm with invalid data.</span>
+
+<span class="sd">        This test checks if the form is invalid when provided with invalid notice data,</span>
+<span class="sd">        specifically an empty subject (assuming it&#39;s required).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;Admin&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;receiver&#39;</span><span class="p">:</span> <span class="s1">&#39;JohnDoe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># Empty subject (assuming it&#39;s required)</span>
+            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Body&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

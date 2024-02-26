@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.models &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.models</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.models</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.core.validators</span> <span class="kn">import</span> <span class="n">MaxValueValidator</span><span class="p">,</span> <span class="n">MinValueValidator</span>
+
+<span class="c1"># Create your models here.</span>
+
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Department Model</span>
+<span class="sd">----------------</span>
+
+<span class="sd">Model representing a department in your organization.</span>
+
+<span class="sd">Attributes:</span>
+<span class="sd">    - ``name`` (str): The name of the department.</span>
+<span class="sd">    - ``location`` (str): The location of the department. Choices are &#39;Block A&#39;, &#39;Block B&#39;, &#39;Block C&#39;, &#39;Block D&#39;, &#39;Block E&#39;.</span>
+<span class="sd">    - ``rank`` (int): The rank of the department.</span>
+<span class="sd">    - ``phone`` (str): The phone number of the department.</span>
+<span class="sd">    - ``email`` (str): The email address of the department.</span>
+<span class="sd">    - ``date_created`` (datetime): The date and time when the department was created.</span>
+<span class="sd">    - ``description`` (str): A description of the department.</span>
+<span class="sd">    </span>
+<span class="sd">Attributes Details:</span>
+<span class="sd">    - ``name``: max_length=30, null=True</span>
+<span class="sd">    - ``location``: max_length=20, null=True, choices=LOCATION</span>
+<span class="sd">    - ``rank``: null=True, blank=True</span>
+<span class="sd">    - ``phone``: max_length=20, null=True</span>
+<span class="sd">    - ``email``: max_length=30, null=True</span>
+<span class="sd">    - ``date_created``: auto_now_add=True</span>
+<span class="sd">    - ``description``: max_length=3000, null=True, blank=True</span>
+
+<span class="sd">Location Choices:</span>
+<span class="sd">    - &#39;Block A&#39;</span>
+<span class="sd">    - &#39;Block B&#39;</span>
+<span class="sd">    - &#39;Block C&#39;</span>
+<span class="sd">    - &#39;Block D&#39;</span>
+<span class="sd">    - &#39;Block E&#39;</span>
+
+<span class="sd">Methods:</span>
+<span class="sd">    - ``__str__``: Returns the name of the department.</span>
+
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="Department">
+<a class="viewcode-back" href="../../modules.html#base.filters.Department">[docs]</a>
+<span class="k">class</span> <span class="nc">Department</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model representing a department in your organization.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        name (str): The name of the department.</span>
+<span class="sd">        location (str): The location of the department. Choices are &#39;Block A&#39;, &#39;Block B&#39;, &#39;Block C&#39;, &#39;Block D&#39;, &#39;Block E&#39;.</span>
+<span class="sd">        rank (int): The rank of the department.</span>
+<span class="sd">        phone (str): The phone number of the department.</span>
+<span class="sd">        email (str): The email address of the department.</span>
+<span class="sd">        date_created (datetime): The date and time when the department was created.</span>
+<span class="sd">        description (str): A description of the department.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">LOCATION</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Block A&#39;</span><span class="p">,</span> <span class="s1">&#39;Block A&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Block B&#39;</span><span class="p">,</span> <span class="s1">&#39;Block B&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Block C&#39;</span><span class="p">,</span> <span class="s1">&#39;Block C&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Block D&#39;</span><span class="p">,</span> <span class="s1">&#39;Block D&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Block E&#39;</span><span class="p">,</span> <span class="s1">&#39;Block E&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter the department&#39;s name.&quot;</span><span class="p">)</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">LOCATION</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Select the department&#39;s location.&quot;</span><span class="p">)</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter the department&#39;s rank.&quot;</span><span class="p">)</span>
+    <span class="n">phone</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter the department&#39;s phone number.&quot;</span><span class="p">)</span>
+    <span class="n">email</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter the department&#39;s email address.&quot;</span><span class="p">)</span>
+    <span class="n">date_created</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;The date and time when the department was created.&quot;</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s2">&quot;Enter a description of the department.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+
+<div class="viewcode-block" id="Student">
+<a class="viewcode-back" href="../../modules.html#base.filters.Student">[docs]</a>
+<span class="k">class</span> <span class="nc">Student</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+
+    <span class="n">STATUS</span><span class="o">=</span><span class="p">(</span>
+            <span class="p">(</span><span class="s1">&#39;Regular&#39;</span><span class="p">,</span><span class="s1">&#39;Regular&#39;</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;Ex-Student&#39;</span><span class="p">,</span><span class="s1">&#39;Ex-Student&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+
+    <span class="c1">#user = models.OneToOneField(User,null=True,blank=True, on_delete=models.CASCADE)</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">hsc_roll</span><span class="o">=</span><span class="n">roll</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">hsc_reg</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">reg_no</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">roll</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># dept=models.ForeignKey(Department,null=True,on_delete=models.SET_NULL,blank=True)</span>
+    <span class="n">session</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">email</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+    <span class="n">phone</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dob</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">address</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fathers_name</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mothers_name</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">guardian_phone</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1">#profile_pic=models.ImageField(default=&quot;profile1.png&quot;,null=True,blank=True)</span>
+    <span class="n">status</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span><span class="p">,</span><span class="n">choices</span><span class="o">=</span><span class="n">STATUS</span><span class="p">)</span>
+    <span class="n">CGPA</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">FloatField</span><span class="p">(</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">MinValueValidator</span><span class="p">(</span><span class="mf">0.0</span><span class="p">),</span> <span class="n">MaxValueValidator</span><span class="p">(</span><span class="mf">4.0</span><span class="p">)])</span>
+    <span class="n">result_description</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;No Details Available now.&quot;</span><span class="p">,</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">blank</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+    
+<div class="viewcode-block" id="Teacher">
+<a class="viewcode-back" href="../../modules.html#base.filters.Teacher">[docs]</a>
+<span class="k">class</span> <span class="nc">Teacher</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>  
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model representing a teacher.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">RANK</span><span class="o">=</span><span class="p">(</span>
+        <span class="p">(</span><span class="s1">&#39;Lecturer&#39;</span><span class="p">,</span><span class="s1">&#39;Lecturer&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Assistant Professor&#39;</span><span class="p">,</span><span class="s1">&#39;Assistant Professor&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Professor&#39;</span><span class="p">,</span><span class="s1">&#39;Professor&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Head of The Department&#39;</span><span class="p">,</span><span class="s1">&#39;Head of The Department&#39;</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="n">name</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The name of the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reg_no</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The registration number of the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rank</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">choices</span><span class="o">=</span><span class="n">RANK</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The rank of the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    :choices: &#39;Lecturer&#39;, &#39;Assistant Professor&#39;, &#39;Professor&#39;, &#39;Head of The Department&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#dept=models.ForeignKey(Department,null=True,on_delete=models.SET_NULL)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The department to which the teacher belongs.</span>
+
+<span class="sd">    :type: Department</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">email</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">EmailField</span><span class="p">()</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The email address of the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">phone</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The phone number of the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">description</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Description about the teacher.</span>
+
+<span class="sd">    :type: str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span></div>
+
+
+<div class="viewcode-block" id="AdminNotice">
+<a class="viewcode-back" href="../../modules.html#base.filters.AdminNotice">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminNotice</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Model representing an administrative notice.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        sender (str): The sender of the notice.</span>
+<span class="sd">        receiver (str): The intended receiver of the notice.</span>
+<span class="sd">        subject (str): The subject of the notice.</span>
+<span class="sd">        body (str): The content or body of the notice.</span>
+<span class="sd">        date_sent (datetime): The date and time when the notice was sent.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        __str__: Returns a string representation of the notice, which is its subject.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">sender</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">null</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;Admin&quot;</span><span class="p">)</span>
+    <span class="n">receiver</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">null</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">body</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+    <span class="n">date_sent</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">auto_now_add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+   
+       
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a string representation of the notice.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The subject of the notice.</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subject</span></div>
+
+        
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

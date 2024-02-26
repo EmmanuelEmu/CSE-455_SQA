@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.views &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span><span class="n">redirect</span><span class="p">,</span><span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.filters</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span>
+<span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">messages</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">user_passes_test</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth</span> <span class="kn">import</span> <span class="n">authenticate</span><span class="p">,</span><span class="n">login</span><span class="p">,</span><span class="n">logout</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">StudentForm</span>
+
+
+
+<div class="viewcode-block" id="common_page">
+<a class="viewcode-back" href="../../modules.html#base.views.common_page">[docs]</a>
+<span class="k">def</span> <span class="nf">common_page</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for rendering the common page.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request: HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - HttpResponse: Rendered response for the common page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/common_page.html&#39;</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="register">
+<a class="viewcode-back" href="../../modules.html#base.views.register">[docs]</a>
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for user registration.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request: HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - HttpResponse: Redirect to the login page(after successful registration).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span><span class="o">=</span> <span class="n">CreateUserForm</span><span class="p">()</span>
+ 
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="o">==</span><span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+                <span class="n">form</span><span class="o">=</span><span class="n">CreateUserForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+                    <span class="n">user</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                    <span class="n">username</span><span class="o">=</span><span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+                    <span class="n">messages</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;Account Created &#39;</span> <span class="o">+</span><span class="n">username</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">)</span>
+    
+
+        <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span><span class="n">form</span><span class="p">}</span>
+        <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/register.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="login_admin">
+<a class="viewcode-back" href="../../modules.html#base.views.login_admin">[docs]</a>
+<span class="k">def</span> <span class="nf">login_admin</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for administrator login.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request: HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - HttpResponse: Redirect to  home page(successful).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">is_authenticated</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+       <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+            <span class="n">username</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">)</span>
+            <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+            <span class="n">user</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">user</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">login</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>  
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Username or Password is incorrect&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/login.html&#39;</span><span class="p">)</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="logout_user">
+<a class="viewcode-back" href="../../modules.html#base.views.logout_user">[docs]</a>
+<span class="k">def</span> <span class="nf">logout_user</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for user logout.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request: HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - HttpResponse: Redirects to the login page after user logout.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">logout</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">)</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="home">
+<a class="viewcode-back" href="../../modules.html#base.views.home">[docs]</a>
+<span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for rendering the home page.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request: HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    - HttpResponse: Rendered response for the home page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">std</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-id&#39;</span><span class="p">)</span>
+    <span class="n">regular_std</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-id&#39;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+    <span class="c1">#all_teacher=Teacher.objects.all()</span>
+    <span class="c1">#top_10_dept=Department.objects.order_by(&#39;-id&#39;)[:10]</span>
+    <span class="c1">#total_teacher=all_teacher.count()</span>
+    <span class="n">total_std</span><span class="o">=</span><span class="n">std</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+    <span class="c1">#total_dept=all_dept.count()</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;std&#39;</span><span class="p">:</span><span class="n">std</span><span class="p">,</span><span class="s1">&#39;regular_std&#39;</span><span class="p">:</span><span class="n">regular_std</span><span class="p">,</span><span class="s1">&#39;total_std&#39;</span><span class="p">:</span><span class="n">total_std</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span> <span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/home.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_teacher">
+<a class="viewcode-back" href="../../modules.html#base.views.create_teacher">[docs]</a>
+<span class="k">def</span> <span class="nf">create_teacher</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_teacher.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+<span class="sd">&quot;&quot;&quot; This is the views section for teacher info viewing&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="teacher_info">
+<a class="viewcode-back" href="../../modules.html#base.views.teacher_info">[docs]</a>
+<span class="k">def</span> <span class="nf">teacher_info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function to display information about a specific teacher.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request (HttpRequest): The HTTP request object.</span>
+<span class="sd">        pk (int): The primary key of the teacher to display information about.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: A response displaying information about the teacher.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">teacher</span><span class="o">=</span><span class="n">Teacher</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;teacher&#39;</span><span class="p">:</span><span class="n">teacher</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/teacher_info.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="update_teacher">
+<a class="viewcode-back" href="../../modules.html#base.views.update_teacher">[docs]</a>
+<span class="k">def</span> <span class="nf">update_teacher</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+    <span class="n">teacher</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Teacher</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">teacher</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">TeacherForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">teacher</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_teacher.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="studentinfo">
+<a class="viewcode-back" href="../../modules.html#base.views.studentinfo">[docs]</a>
+<span class="k">def</span> <span class="nf">studentinfo</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Render the student information page.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request: HttpRequest object.</span>
+<span class="sd">        pk: Primary key of the student object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered HttpResponse object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">student</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;student&#39;</span><span class="p">:</span><span class="n">student</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/student_info.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_student">
+<a class="viewcode-back" href="../../modules.html#base.views.create_student">[docs]</a>
+<span class="k">def</span> <span class="nf">create_student</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Render the form for creating a new student or process form submission.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request: HttpRequest object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Rendered HttpResponse object with the form or redirects to home page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+            
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_student.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="update_student">
+<a class="viewcode-back" href="../../modules.html#base.views.update_student">[docs]</a>
+<span class="k">def</span> <span class="nf">update_student</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function to update a student record.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        request (HttpRequest): The HTTP request object.</span>
+<span class="sd">        pk (int): The primary key of the student to be updated.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: Renders the create_student.html template with the updated form.</span>
+<span class="sd">                      If the form is valid, redirects to the &#39;home&#39; URL.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Http404: If the student with the given primary key does not exist.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">student</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Student</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">StudentForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">student</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_student.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">,</span> <span class="s1">&#39;update_mode&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span></div>
+
+
+
+
+
+
+
+<div class="viewcode-block" id="nav_stu_list">
+<a class="viewcode-back" href="../../modules.html#base.views.nav_stu_list">[docs]</a>
+<span class="k">def</span> <span class="nf">nav_stu_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Display a list of students with filtering options.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request (HttpRequest): The HTTP request object.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    HttpResponse: Rendered HTML page displaying the student list.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">    This function is intended to be used as a Django view to display and filter a list of students.</span>
+
+
+<span class="sd">    Sphinx Tags:</span>
+<span class="sd">    - :param request: The HTTP request object.</span>
+<span class="sd">    - :return: Rendered HTML page displaying the student list.</span>
+
+<span class="sd">    Dependencies:</span>
+<span class="sd">    - Django must be properly installed in the project.</span>
+<span class="sd">    - StudentFilter class should be defined in the current module or imported.</span>
+
+<span class="sd">    Notes:</span>
+<span class="sd">    The function fetches all students from the database , order them by ID in descending order and applies filtering  based on the request</span>
+<span class="sd">    parameters using the StudentFilter, counts the total number of students and renders the result in the</span>
+<span class="sd">    &#39;base/nav_stu_list.html&#39; template.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">students</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;-id&#39;</span><span class="p">)</span>
+
+    <span class="n">myFilter</span><span class="o">=</span><span class="n">StudentFilter</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">,</span> <span class="n">queryset</span><span class="o">=</span><span class="n">students</span><span class="p">)</span>
+    <span class="n">students</span><span class="o">=</span><span class="n">myFilter</span><span class="o">.</span><span class="n">qs</span>
+    <span class="n">total_std</span><span class="o">=</span><span class="n">students</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;myFilter&#39;</span><span class="p">:</span><span class="n">myFilter</span><span class="p">,</span><span class="s1">&#39;students&#39;</span><span class="p">:</span><span class="n">students</span><span class="p">,</span><span class="s1">&#39;total_std&#39;</span><span class="p">:</span><span class="n">total_std</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Students&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/nav_stu_list.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+
+
+
+<div class="viewcode-block" id="delete_student">
+<a class="viewcode-back" href="../../modules.html#base.views.delete_student">[docs]</a>
+<span class="k">def</span> <span class="nf">delete_student</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function to delete a student record.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">    - request (HttpRequest): The HTTP request object.</span>
+<span class="sd">    - pk (int): Primary key of the student record to be deleted.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">    HttpResponse: Redirects to the &#39;home&#39; view after successful deletion.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">    This function is intended to be used as a Django view to delete a specific student record.</span>
+
+<span class="sd">    Sphinx Tags:</span>
+<span class="sd">    - :param request: The HTTP request object.</span>
+<span class="sd">    - :param pk: Primary key of the student record to be deleted.</span>
+<span class="sd">    - :return: Redirects to the &#39;home&#39; view after successful deletion.</span>
+
+
+<span class="sd">    Dependencies:</span>
+<span class="sd">    - Django must be properly installed in the project.</span>
+
+
+
+<span class="sd">    Notes:</span>
+<span class="sd">    The function fetches the student record with the provided primary key, handles the deletion</span>
+<span class="sd">    upon receiving a POST request and redirects to the &#39;home&#39; view after successful deletion.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">item</span><span class="o">=</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">item</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;item&#39;</span><span class="p">:</span><span class="n">item</span><span class="p">,</span><span class="s1">&#39;func&#39;</span><span class="p">:</span><span class="s1">&#39;delete_std&#39;</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/delete.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: base.views</span>
+<span class="sd">   :synopsis: Views for the base app.</span>
+
+<span class="sd">create_department</span>
+<span class="sd">-----------------</span>
+
+<span class="sd">.. function:: create_department(request)</span>
+
+<span class="sd">   View function to create a new department.</span>
+
+<span class="sd">   This function handles both GET and POST requests. For GET requests,</span>
+<span class="sd">   it renders a form to create a new department. For POST requests,</span>
+<span class="sd">   it validates the form data and saves the new department if the form</span>
+<span class="sd">   is valid.</span>
+
+<span class="sd">   :param request: The HTTP request object.</span>
+<span class="sd">   :type request: HttpRequest</span>
+<span class="sd">   :return: A response to the request.</span>
+<span class="sd">   :rtype: HttpResponse</span>
+<span class="sd">   &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="create_department">
+<a class="viewcode-back" href="../../modules.html#base.views.create_department">[docs]</a>
+<span class="k">def</span> <span class="nf">create_department</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function to create a new department.</span>
+
+<span class="sd">    This function handles both GET and POST requests. For GET requests,</span>
+<span class="sd">    it renders a form to create a new department. For POST requests,</span>
+<span class="sd">    it validates the form data and saves the new department if the form</span>
+<span class="sd">    is valid.</span>
+
+<span class="sd">    :param request: The HTTP request object.</span>
+<span class="sd">    :type request: HttpRequest</span>
+<span class="sd">    :return: A response to the request. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;create_department&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_department.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">department_info</span>
+<span class="sd">---------------</span>
+
+<span class="sd">.. function:: department_info(request, pk)</span>
+
+<span class="sd">   View function to retrieve and display department information.</span>
+
+<span class="sd">   :param request: An object representing the request.</span>
+<span class="sd">   :type request: HttpRequest</span>
+<span class="sd">   :param pk: The primary key of the department to retrieve.</span>
+<span class="sd">   :type pk: int</span>
+<span class="sd">   :return: A rendered HTML response displaying department information.</span>
+<span class="sd">   :rtype: HttpResponse</span>
+<span class="sd">   :raises Department.DoesNotExist: If the department with the given primary key does not exist.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="department_info">
+<a class="viewcode-back" href="../../modules.html#base.views.department_info">[docs]</a>
+<span class="k">def</span> <span class="nf">department_info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function to retrieve and display department information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request: HttpRequest object representing the request.</span>
+<span class="sd">        pk: Primary key of the department to retrieve.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: Rendered HTML response displaying department information.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        Department.DoesNotExist: If the department with the given primary key does not exist.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dept</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;dept&#39;</span><span class="p">:</span> <span class="n">dept</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/department_info.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">update_department</span>
+<span class="sd">-----------------</span>
+
+<span class="sd">.. function:: update_department(request, pk)</span>
+
+<span class="sd">   View function to update a department.</span>
+
+<span class="sd">   :param request: An object representing the request.</span>
+<span class="sd">   :type request: HttpRequest</span>
+<span class="sd">   :param pk: The primary key of the department to update.</span>
+<span class="sd">   :type pk: int</span>
+<span class="sd">   :return: A rendered HTML response displaying the form to update the department.</span>
+<span class="sd">   :rtype: HttpResponse</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="update_department">
+<a class="viewcode-back" href="../../modules.html#base.views.update_department">[docs]</a>
+<span class="k">def</span> <span class="nf">update_department</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function to update a department.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        request: An object representing the request.</span>
+<span class="sd">        pk: The primary key of the department to update.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: A rendered HTML response displaying the form to update the department.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+    <span class="n">current_rank</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">rank</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">DepartmentForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">cleaned_data</span><span class="p">[</span><span class="s1">&#39;rank&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">!=</span> <span class="n">current_rank</span> <span class="ow">and</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+                <span class="n">messages</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;Already exists a dept with this Rank&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+                <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;create_department&#39;</span><span class="p">)</span>
+
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_department.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_notice">
+<a class="viewcode-back" href="../../modules.html#base.views.create_notice">[docs]</a>
+<span class="k">def</span> <span class="nf">create_notice</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for creating an administrative notice.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: Rendered create notice page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>  
+           <span class="n">notice</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+           <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+       <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_notice.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="update_notice">
+<a class="viewcode-back" href="../../modules.html#base.views.update_notice">[docs]</a>
+<span class="k">def</span> <span class="nf">update_notice</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function for updating an AdminNotice.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        - request: HttpRequest object representing the incoming request.</span>
+<span class="sd">        - pk: Primary key of the AdminNotice to be updated.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - If the request method is POST and the form is valid, the notice is updated, </span>
+<span class="sd">          and the user is redirected to the &#39;home&#39; page.</span>
+<span class="sd">        - If the request method is GET, the form is populated with the existing notice data.</span>
+<span class="sd">        - The rendered HTML page displaying the form for updating the AdminNotice.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        - Http404: If the specified AdminNotice with the given primary key does not exist.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">notice</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">AdminNotice</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">notice</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>  
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AdminNoticeForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">notice</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;base/create_notice.html&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;form&#39;</span><span class="p">:</span> <span class="n">form</span><span class="p">})</span></div>
+
+
+
+<div class="viewcode-block" id="notice_details">
+<a class="viewcode-back" href="../../modules.html#base.views.notice_details">[docs]</a>
+<span class="k">def</span> <span class="nf">notice_details</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="n">pk</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View for displaying details of a specific notice.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pk (str): Primary key of the notice.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        HttpResponse: Rendered notice details page.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">notice</span> <span class="o">=</span> <span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">pk</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;notice&#39;</span><span class="p">:</span> <span class="n">notice</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="s1">&#39;base/notice_details.html&#39;</span><span class="p">,</span><span class="n">context</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

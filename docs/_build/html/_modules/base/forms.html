@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.forms &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.forms</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.forms</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.forms</span> <span class="kn">import</span> <span class="n">ModelForm</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">django.forms.widgets</span> <span class="kn">import</span> <span class="n">Widget</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.forms</span> <span class="kn">import</span> <span class="n">UserCreationForm</span>
+<span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">CreateUserForm</span>
+<span class="sd">===============</span>
+
+<span class="sd">.. autoclass:: yourapp.forms.CreateUserForm</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :undoc-members:</span>
+<span class="sd">   :show-inheritance:</span>
+
+<span class="sd">   Form for creating a new user.</span>
+
+<span class="sd">   Inherits from Django&#39;s UserCreationForm.</span>
+
+<span class="sd">   .. autoclass:: Meta</span>
+<span class="sd">      :members:</span>
+<span class="sd">      :undoc-members:</span>
+
+<span class="sd">      Meta class for CreateUserForm.</span>
+
+<span class="sd">      Defines the model and fields to be used in the form.</span>
+
+<span class="sd">DepartmentForm</span>
+<span class="sd">==============</span>
+
+<span class="sd">.. autoclass:: yourapp.forms.DepartmentForm</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :undoc-members:</span>
+<span class="sd">   :show-inheritance:</span>
+
+<span class="sd">   Form for creating or updating a department.</span>
+
+<span class="sd">   Inherits from Django&#39;s ModelForm.</span>
+
+<span class="sd">   .. autoclass:: Meta</span>
+<span class="sd">      :members:</span>
+<span class="sd">      :undoc-members:</span>
+
+<span class="sd">      Meta class for DepartmentForm.</span>
+
+<span class="sd">      Defines the model and fields to be used in the form.</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+
+<div class="viewcode-block" id="CreateUserForm">
+<a class="viewcode-back" href="../../modules.html#base.forms.CreateUserForm">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateUserForm</span><span class="p">(</span><span class="n">UserCreationForm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for creating a new user.</span>
+
+<span class="sd">    Inherits from Django&#39;s UserCreationForm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CreateUserForm.Meta">
+<a class="viewcode-back" href="../../modules.html#base.forms.CreateUserForm.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for CreateUserForm.</span>
+
+<span class="sd">        Defines the model and fields to be used in the form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;password1&#39;</span><span class="p">,</span> <span class="s1">&#39;password2&#39;</span><span class="p">]</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="DepartmentForm">
+<a class="viewcode-back" href="../../modules.html#base.forms.DepartmentForm">[docs]</a>
+<span class="k">class</span> <span class="nc">DepartmentForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for creating or updating a department.</span>
+
+<span class="sd">    Inherits from Django&#39;s ModelForm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DepartmentForm.Meta">
+<a class="viewcode-back" href="../../modules.html#base.forms.DepartmentForm.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Meta class for DepartmentForm.</span>
+
+<span class="sd">        Defines the model and fields to be used in the form.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Department</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+        
+<div class="viewcode-block" id="TeacherForm">
+<a class="viewcode-back" href="../../modules.html#base.forms.TeacherForm">[docs]</a>
+<span class="k">class</span> <span class="nc">TeacherForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for creating or updating a teacher.</span>
+
+<span class="sd">    This form is used to create or update instances of the Teacher model.</span>
+<span class="sd">    It inherits from Django&#39;s ModelForm class and automatically generates</span>
+<span class="sd">    form fields based on the Teacher model&#39;s fields.</span>
+
+<span class="sd">    Example usage:</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        # Create a form instance</span>
+<span class="sd">        form = TeacherForm()</span>
+
+<span class="sd">        # Process form submission</span>
+<span class="sd">        if request.method == &#39;POST&#39;:</span>
+<span class="sd">            form = TeacherForm(request.POST)</span>
+<span class="sd">            if form.is_valid():</span>
+<span class="sd">                # Save the form data to create or update a Teacher instance</span>
+<span class="sd">                form.save()</span>
+
+<span class="sd">    For more information on working with Django forms, see:</span>
+<span class="sd">    https://docs.djangoproject.com/en/stable/topics/forms/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>    
+<div class="viewcode-block" id="TeacherForm.Meta">
+<a class="viewcode-back" href="../../modules.html#base.forms.TeacherForm.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Teacher</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+        
+<div class="viewcode-block" id="StudentForm">
+<a class="viewcode-back" href="../../modules.html#base.forms.StudentForm">[docs]</a>
+<span class="k">class</span> <span class="nc">StudentForm</span><span class="p">(</span><span class="n">ModelForm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for creating and updating Student objects.</span>
+
+<span class="sd">    Inherits from:</span>
+<span class="sd">        ModelForm: A form that automatically generates form fields based on the Student model.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        Meta: A inner class that defines metadata options for the form.</span>
+<span class="sd">            model (Model): The model associated with the form (Student).</span>
+<span class="sd">            fields (list or tuple): The fields to include in the form. Here, &#39;__all__&#39; includes all fields.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        To use this form in a view, simply instantiate it:</span>
+
+<span class="sd">        &gt;&gt;&gt; form = StudentForm()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="StudentForm.Meta">
+<a class="viewcode-back" href="../../modules.html#base.forms.StudentForm.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Student</span>
+        <span class="n">fields</span><span class="o">=</span><span class="s1">&#39;__all__&#39;</span></div>
+</div>
+
+
+
+
+<div class="viewcode-block" id="AdminNoticeForm">
+<a class="viewcode-back" href="../../modules.html#base.forms.AdminNoticeForm">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminNoticeForm</span><span class="p">(</span><span class="n">forms</span><span class="o">.</span><span class="n">ModelForm</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Form for creating or updating an administrative notice.</span>
+
+<span class="sd">    Inherits from:</span>
+<span class="sd">        ModelForm (django.forms)</span>
+
+<span class="sd">    Meta:</span>
+<span class="sd">        model (AdminNotice): The model associated with the form.</span>
+<span class="sd">        fields (str or list): The fields to include in the form. Use &#39;__all__&#39; to include all fields.</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        form = AdminNoticeForm(data={&#39;sender&#39;: &#39;Admin&#39;, &#39;receiver&#39;: &#39;John&#39;, &#39;subject&#39;: &#39;Important Update&#39;, &#39;body&#39;: &#39;Please read the latest announcement.&#39;})</span>
+<span class="sd">        if form.is_valid():</span>
+<span class="sd">            notice = form.save()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="AdminNoticeForm.Meta">
+<a class="viewcode-back" href="../../modules.html#base.forms.AdminNoticeForm.Meta">[docs]</a>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        
+        <span class="n">model</span> <span class="o">=</span> <span class="n">AdminNotice</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s1">&#39;__all__&#39;</span> </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

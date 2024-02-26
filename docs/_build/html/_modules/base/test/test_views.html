@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.test.test_views &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.test.test_views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.test.test_views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">Client</span><span class="p">,</span> <span class="n">RequestFactory</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponse</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">TeacherForm</span>  <span class="c1"># Import your TeacherForm</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">Teacher</span>  <span class="c1"># Import your Teacher model</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">Student</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpRequest</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">StudentForm</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">django.http.response</span> <span class="kn">import</span> <span class="n">HttpResponseRedirectBase</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpResponseRedirect</span>
+<span class="kn">from</span> <span class="nn">base.views</span> <span class="kn">import</span> <span class="n">create_student</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">AdminNoticeForm</span>  <span class="c1"># Make sure to import your form</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">AdminNotice</span>
+<span class="kn">from</span> <span class="nn">base.views</span> <span class="kn">import</span> <span class="n">update_teacher</span>
+
+<span class="kn">from</span> <span class="nn">base.views</span> <span class="kn">import</span> <span class="n">department_info</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">Department</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">RequestFactory</span><span class="p">,</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">base.views</span> <span class="kn">import</span> <span class="n">update_department</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">DepartmentForm</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+
+
+
+
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span><span class="p">,</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">CreateUserForm</span>
+<span class="kn">from</span> <span class="nn">django.http</span> <span class="kn">import</span> <span class="n">HttpRequest</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">Student</span>
+<span class="kn">from</span> <span class="nn">base.forms</span> <span class="kn">import</span> <span class="n">StudentForm</span>
+<span class="kn">from</span> <span class="nn">django.core.exceptions</span> <span class="kn">import</span> <span class="n">ObjectDoesNotExist</span>
+<span class="kn">from</span> <span class="nn">base.views</span> <span class="kn">import</span> <span class="n">create_student</span>
+
+
+
+
+<div class="viewcode-block" id="NavStuListTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NavStuListTest">[docs]</a>
+<span class="k">class</span> <span class="nc">NavStuListTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the nav_stu_list.</span>
+
+<span class="sd">    Inherits from:</span>
+<span class="sd">    - TestCase: Django&#39;s built-in test case class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">    - student1: Sample instance of the Student model for testing.</span>
+<span class="sd">    - student2: Sample instance of the Student model for testing.</span>
+<span class="sd">    - student3: Sample instance of the Student model for testing.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - setUp: Method to set up sample data for testing.</span>
+<span class="sd">    - test_nav_stu_list_view: Method to test the functionality of the nav_stu_list view.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">    This test case is designed to test the functionality of the nav_stu_list view including basic rendering</span>
+<span class="sd">    and filtering.</span>
+
+
+<span class="sd">    Django Models:</span>
+<span class="sd">    - Student: The Django model representing student information.</span>
+
+<span class="sd">    Dependencies:</span>
+<span class="sd">    - Django must be properly installed in the project.</span>
+<span class="sd">    - TestCase class should be imported from &#39;django.test&#39;.</span>
+<span class="sd">    - Client class and reverse function should be imported from &#39;django.test.client&#39;.</span>
+<span class="sd">    - Student model should be imported from the appropriate module.</span>
+
+
+<span class="sd">    Notes:</span>
+<span class="sd">    The test case sets up sample data with three student instances and tests the rendering and filtering</span>
+<span class="sd">    functionality of the NavStuList view using Django&#39;s test client.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NavStuListTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NavStuListTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up sample data for testing.</span>
+
+<span class="sd">        Sphinx Tags:</span>
+<span class="sd">        - :student1: Sample instance of the Student model for testing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create some sample data for testing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s2">&quot;001&quot;</span><span class="p">,</span> <span class="n">CGPA</span><span class="o">=</span><span class="mf">3.7</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student2</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s2">&quot;002&quot;</span><span class="p">,</span> <span class="n">CGPA</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;Ex-Student&#39;</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student3</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Smith&quot;</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s2">&quot;003&quot;</span><span class="p">,</span> <span class="n">CGPA</span><span class="o">=</span><span class="mf">3.8</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NavStuListTest.test_nav_stu_list_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NavStuListTest.test_nav_stu_list_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_nav_stu_list_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the functionality of the nav_stu_list view.</span>
+
+<span class="sd">        Sphinx Tags:</span>
+<span class="sd">        - :student1: Sample instance of the Student model for testing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a client for making requests</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+
+        <span class="c1"># Make a GET request to the view</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;nav_stu_list&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Check if the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="c1"># Check if the rendered HTML contains the names of the students</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Test the filtering by providing query parameters in the request</span>
+        <span class="n">response_filtered</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;nav_stu_list&#39;</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">})</span>
+
+        <span class="c1"># Check if the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response_filtered</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="c1"># Check if the rendered HTML contains the filtered students</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response_filtered</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertNotContains</span><span class="p">(</span><span class="n">response_filtered</span><span class="p">,</span> <span class="s1">&#39;Jane&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response_filtered</span><span class="p">,</span> <span class="s1">&#39;Smith&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+
+
+
+<div class="viewcode-block" id="DeleteStudentTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DeleteStudentTest">[docs]</a>
+<span class="k">class</span> <span class="nc">DeleteStudentTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the delete_student.</span>
+
+<span class="sd">    Inherits:</span>
+<span class="sd">    - TestCase: Django&#39;s built-in test case class.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">    - student1: Sample instance of the Student model for testing.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - setUp: Method to set up sample data for testing.</span>
+<span class="sd">    - test_delete_student_view: Method to test the functionality of the DeleteStudent view.</span>
+
+<span class="sd">    Usage:</span>
+<span class="sd">    This test case is designed to test the functionality of the DeleteStudent view, including rendering</span>
+<span class="sd">    and the deletion of a student.</span>
+
+<span class="sd">   </span>
+<span class="sd">    Django Models:</span>
+<span class="sd">    - Student: The Django model representing student information.</span>
+
+<span class="sd">    Dependencies:</span>
+<span class="sd">    - Django must be properly installed in the project.</span>
+<span class="sd">    - TestCase class should be imported from &#39;django.test&#39;.</span>
+<span class="sd">    - Client class and reverse function should be imported from &#39;django.test.client&#39;.</span>
+
+
+
+<span class="sd">    Notes:</span>
+<span class="sd">    The test case sets up sample data with one student instance and tests the rendering and deletion</span>
+<span class="sd">    functionality of the delete_student view using Django&#39;s test client.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DeleteStudentTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DeleteStudentTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up sample data for testing.</span>
+
+<span class="sd">        Sphinx Tags:</span>
+<span class="sd">        - :student1: Sample instance of the Student model for testing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create some sample data for testing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">student1</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;John&quot;</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="s2">&quot;001&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DeleteStudentTest.test_delete_student_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DeleteStudentTest.test_delete_student_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_delete_student_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the functionality of the delete_student view.</span>
+
+<span class="sd">        Sphinx Tags:</span>
+<span class="sd">        - :student1: Sample instance of the Student model for testing.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a client for making requests</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+
+        <span class="c1"># Get the URL for deleting the student</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;delete_student&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">student1</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+
+        <span class="c1"># Make a GET request to the view</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="c1"># Check if the rendered HTML contains the student&#39;s information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Make a POST request to delete the student</span>
+        <span class="n">response_post</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response redirects to &#39;home&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRedirects</span><span class="p">(</span><span class="n">response_post</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Check if the student is deleted</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<span class="k">class</span> <span class="nc">TestCommonPageView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the common_page view.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - setUp(): Set up necessary variables for testing.</span>
+<span class="sd">    - test_common_page_view(): Test the common_page view.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary variables for testing.</span>
+
+<span class="sd">        Creates a test client and defines the common_page URL.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">common_page_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;common_page&#39;</span><span class="p">)</span> 
+
+    <span class="k">def</span> <span class="nf">test_common_page_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the common_page view.</span>
+
+<span class="sd">        Simulates a GET request to the common_page view and asserts the response status code and template used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">common_page_url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/common_page.html&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TestRegister">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestRegister">[docs]</a>
+<span class="k">class</span> <span class="nc">TestRegister</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the register view.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - setUp(): Set up necessary variables for testing.</span>
+<span class="sd">    - test_register_view_get(): Test the GET request to the register view.</span>
+<span class="sd">    - test_register_view_post_valid_form(): Test the POST request to the register view with a valid form.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestRegister.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestRegister.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary variables for testing.</span>
+
+<span class="sd">        Creates a test client and defines the register and login URLs.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">register_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;register&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">login_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestRegister.test_register_view_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestRegister.test_register_view_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_register_view_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the GET request to the register view.</span>
+
+<span class="sd">        Simulates a GET request to the register view and asserts the response status code and template used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">register_url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/register.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestRegister.test_register_view_post_valid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestRegister.test_register_view_post_valid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_register_view_post_valid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the POST request to the register view with a valid form.</span>
+
+<span class="sd">        Simulates a POST request to the register view with valid form data and asserts the redirection to the login page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span><span class="s1">&#39;email@gmail.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password1&#39;</span><span class="p">:</span> <span class="s1">&#39;TestPassword123!&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password2&#39;</span><span class="p">:</span> <span class="s1">&#39;TestPassword123!&#39;</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">register_url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRedirects</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">login_url</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TestLoginAdmin">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLoginAdmin">[docs]</a>
+<span class="k">class</span> <span class="nc">TestLoginAdmin</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the login_admin view.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - setUp(): Set up necessary variables for testing.</span>
+<span class="sd">    - test_login_admin_view_incorrect_credentials(): Test the login_admin view with incorrect credentials.</span>
+<span class="sd">    - test_login_admin_view_correct_credentials(): Test the login_admin view with correct credentials.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestLoginAdmin.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLoginAdmin.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary variables for testing.</span>
+
+<span class="sd">        Creates a test user for login attempts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestLoginAdmin.test_login_admin_view_incorrect_credentials">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLoginAdmin.test_login_admin_view_incorrect_credentials">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_login_admin_view_incorrect_credentials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the login_admin view with incorrect credentials.</span>
+
+<span class="sd">        Simulates a login attempt with incorrect credentials and asserts the response status code and error message.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">),</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;incorrect_user&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;incorrect_password&#39;</span>
+        <span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertContains</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;Username or Password is incorrect&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestLoginAdmin.test_login_admin_view_correct_credentials">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLoginAdmin.test_login_admin_view_correct_credentials">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_login_admin_view_correct_credentials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the login_admin view with correct credentials.</span>
+
+<span class="sd">        Simulates a login attempt with correct credentials and asserts the successful redirection to the home page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;login&#39;</span><span class="p">),</span> <span class="p">{</span>
+            <span class="s1">&#39;username&#39;</span><span class="p">:</span> <span class="s1">&#39;testuser&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;testpassword&#39;</span>
+        <span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TestLogoutAdmin">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLogoutAdmin">[docs]</a>
+<span class="k">class</span> <span class="nc">TestLogoutAdmin</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the logout_user view.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">    - test_logout_user_view(): Test the logout_user view.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="TestLogoutAdmin.test_logout_user_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestLogoutAdmin.test_logout_user_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_logout_user_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the logout_user view.</span>
+
+<span class="sd">        Simulates a GET request to the logout_user view and asserts the response status code.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;logout&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+
+
+<div class="viewcode-block" id="CreateTeacherViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateTeacherViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateTeacherViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CreateTeacherViewTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateTeacherViewTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">create_teacher_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_teacher&#39;</span><span class="p">)</span>  <span class="c1"># Assuming &#39;create_teacher&#39; is the name of your URL pattern</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">home_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CreateTeacherViewTest.test_create_teacher_post">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateTeacherViewTest.test_create_teacher_post">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_teacher_post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Assuming valid form data</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Teacher&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="s1">&#39;Lecturer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dept&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># Pass an empty string for the dept field</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test description&#39;</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_teacher_url</span><span class="p">,</span> <span class="n">form_data</span><span class="p">)</span>
+
+        <span class="c1"># Check if the teacher was created successfully and redirected to &#39;home&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># 302 is the status code for redirect</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>  <span class="c1"># Assuming &#39;home&#39; is the name of your home URL pattern</span>
+        <span class="c1"># self.assertRedirects(response, self.home_url)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Teacher</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Teacher&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span></div>
+
+    
+
+
+<div class="viewcode-block" id="CreateTeacherViewTest.test_create_teacher_invalid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateTeacherViewTest.test_create_teacher_invalid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_teacher_invalid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Assuming invalid form data</span>
+        <span class="n">invalid_form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Teacher&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;123456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="s1">&#39;Lecturer&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dept&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># Pass an empty string for the dept field</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test description&#39;</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_teacher_url</span><span class="p">,</span> <span class="n">invalid_form_data</span><span class="p">)</span>
+
+        <span class="c1"># Check if the form is re-rendered with errors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># 200 is the status code for successful HTTP response</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFormError</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;This field is required.&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFormError</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;form&#39;</span><span class="p">,</span> <span class="s1">&#39;subject&#39;</span><span class="p">,</span> <span class="s1">&#39;This field is required.&#39;</span><span class="p">)</span></div>
+
+        <span class="c1"># Add more assertions for other fields as necessary</span>
+
+<div class="viewcode-block" id="CreateTeacherViewTest.test_create_teacher_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateTeacherViewTest.test_create_teacher_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_teacher_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">create_teacher_url</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response is successful and the correct template is rendered</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_teacher.html&#39;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="TeacherUpdateTestCase">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherUpdateTestCase">[docs]</a>
+<span class="k">class</span> <span class="nc">TeacherUpdateTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TeacherUpdateTestCase.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherUpdateTestCase.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">factory</span> <span class="o">=</span> <span class="n">RequestFactory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;John Doe&#39;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;john@example.com&#39;</span><span class="p">)</span>  <span class="c1"># Create a sample teacher</span></div>
+
+
+<div class="viewcode-block" id="TeacherUpdateTestCase.test_update_teacher">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherUpdateTestCase.test_update_teacher">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_teacher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_teacher&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">,))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Jane Doe&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;jane@example.com&#39;</span><span class="p">}</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">update_teacher</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Check if redirected after successful form submission</span>
+        <span class="n">updated_teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_teacher</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Jane Doe&#39;</span><span class="p">)</span>  <span class="c1"># Check if name is updated correctly</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_teacher</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">&#39;jane@example.com&#39;</span><span class="p">)</span>  <span class="c1"># Check if email is updated correctly</span></div>
+
+
+        <span class="c1"># Additional tests if needed</span>
+
+<div class="viewcode-block" id="TeacherUpdateTestCase.test_update_teacher_invalid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherUpdateTestCase.test_update_teacher_invalid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_teacher_invalid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_teacher&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">,))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;jane@example.com&#39;</span><span class="p">}</span>  <span class="c1"># Invalid form data</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">factory</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">update_teacher</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>  <span class="c1"># Check if form is re-rendered</span></div>
+</div>
+
+        <span class="c1"># self.assertContains(response, &#39;This field is required.&#39;)  # Check if form errors are displayed</span>
+
+<div class="viewcode-block" id="TeacherInfoViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherInfoViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">TeacherInfoViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TeacherInfoViewTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherInfoViewTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">teacher</span> <span class="o">=</span> <span class="n">Teacher</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Teacher&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TeacherInfoViewTest.test_teacher_info_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TeacherInfoViewTest.test_teacher_info_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_teacher_info_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;teacher_info&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="o">.</span><span class="n">pk</span><span class="p">]))</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/teacher_info.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;teacher&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">teacher</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TestCommonPageView">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCommonPageView">[docs]</a>
+<span class="k">class</span> <span class="nc">TestCommonPageView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestCommonPageView.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCommonPageView.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">common_page_url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;common_page&#39;</span><span class="p">)</span> </div>
+
+
+<div class="viewcode-block" id="TestCommonPageView.test_common_page_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCommonPageView.test_common_page_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_common_page_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+  
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">common_page_url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/common_page.html&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="StudentViewsTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.StudentViewsTest">[docs]</a>
+<span class="k">class</span> <span class="nc">StudentViewsTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="StudentViewsTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.StudentViewsTest.setUp">[docs]</a>
+      <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Student&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StudentViewsTest.test_studentinfo_get_request">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.StudentViewsTest.test_studentinfo_get_request">[docs]</a>
+      <span class="k">def</span> <span class="nf">test_studentinfo_get_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;student_info&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">student</span><span class="o">.</span><span class="n">id</span><span class="p">]))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/student_info.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;student&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">student</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="TestCreateStudentView">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCreateStudentView">[docs]</a>
+<span class="k">class</span> <span class="nc">TestCreateStudentView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+    
+<div class="viewcode-block" id="TestCreateStudentView.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCreateStudentView.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Setup method to initialize the test client.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="TestCreateStudentView.test_create_student_view_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCreateStudentView.test_create_student_view_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_student_view_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to verify that the create student view returns a status code of 200 and uses the correct template for GET request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_student&#39;</span><span class="p">))</span>    
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_student.html&#39;</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="TestCreateStudentView.test_create_student_view_post_valid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestCreateStudentView.test_create_student_view_post_valid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_student_view_post_valid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to verify that the create student view successfully creates a student object with valid form data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Ali ahmed&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_roll&#39;</span><span class="p">:</span> <span class="s1">&#39;12345&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_reg&#39;</span><span class="p">:</span> <span class="s1">&#39;43123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;4324456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="s1">&#39;43789&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;session&#39;</span><span class="p">:</span> <span class="s1">&#39;2018-2019&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;ali@gmail.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dob&#39;</span><span class="p">:</span> <span class="s1">&#39;10-01-2000&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;dhaka&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fathers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;hasan ali&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mothers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;afroza khatun&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;guardian_phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;first year&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;CGPA&#39;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span>
+            <span class="s1">&#39;result_description&#39;</span><span class="p">:</span> <span class="s1">&#39;Good performance&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_student&#39;</span><span class="p">),</span> <span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
+
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Ali ahmed&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hsc_roll</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">hsc_reg</span><span class="o">=</span><span class="s1">&#39;43123&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">reg_no</span><span class="o">=</span> <span class="s1">&#39;4324456&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">roll</span><span class="o">=</span><span class="s1">&#39;43789&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">session</span><span class="o">=</span><span class="s1">&#39;2018-2019&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="s1">&#39;ali@gmail.com&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">phone</span><span class="o">=</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">dob</span><span class="o">=</span><span class="s1">&#39;10-01-2000&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">address</span><span class="o">=</span><span class="s1">&#39;dhaka&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">fathers_name</span><span class="o">=</span><span class="s1">&#39;hasan ali&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">mothers_name</span><span class="o">=</span><span class="s1">&#39;afroza khatun&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">guardian_phone</span><span class="o">=</span><span class="s1">&#39;9876543210&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s1">&#39;first year&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s1">&#39;Regular&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">CGPA</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">result_description</span><span class="o">=</span><span class="s1">&#39;Good performance&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">())</span></div>
+</div>
+
+
+
+
+
+<div class="viewcode-block" id="TestUpdateStudentView">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestUpdateStudentView">[docs]</a>
+<span class="k">class</span> <span class="nc">TestUpdateStudentView</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the update_student view.</span>
+
+<span class="sd">    Methods:</span>
+<span class="sd">        setUp(self): Prepares the test environment before each test method is run.</span>
+<span class="sd">        test_update_student_view_get(self): Tests the GET request to the update_student view.</span>
+<span class="sd">        test_update_student_view_post_valid_form(self): Tests the POST request with valid form data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="TestUpdateStudentView.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestUpdateStudentView.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up the test environment.</span>
+<span class="sd">        </span>
+<span class="sd">        This method is called before each test method to set up any necessary preconditions.</span>
+<span class="sd">        It initializes the test client.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
+
+        
+
+<div class="viewcode-block" id="TestUpdateStudentView.test_update_student_view_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestUpdateStudentView.test_update_student_view_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_student_view_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the GET request to the update_student view.</span>
+
+<span class="sd">        Checks if the view returns a status code of 200 and uses the correct template.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Student&#39;</span><span class="p">,</span> <span class="n">hsc_roll</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+        
+        
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_student&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">student</span><span class="o">.</span><span class="n">pk</span><span class="p">]))</span>  
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_student.html&#39;</span><span class="p">)</span></div>
+
+
+        
+
+<div class="viewcode-block" id="TestUpdateStudentView.test_update_student_view_post_valid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.TestUpdateStudentView.test_update_student_view_post_valid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_student_view_post_valid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the POST request with valid form data.</span>
+
+<span class="sd">        Checks if the view updates the student record correctly and redirects after a successful update.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Student&#39;</span><span class="p">,</span> <span class="n">hsc_roll</span><span class="o">=</span><span class="s1">&#39;12345&#39;</span><span class="p">)</span>
+
+        
+        <span class="n">form_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Ali Ahmed&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hsc_roll&#39;</span><span class="p">:</span> <span class="s1">&#39;12345&#39;</span><span class="p">,</span>  
+            <span class="s1">&#39;hsc_reg&#39;</span><span class="p">:</span> <span class="s1">&#39;43123&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;reg_no&#39;</span><span class="p">:</span> <span class="s1">&#39;4324456&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;roll&#39;</span><span class="p">:</span> <span class="s1">&#39;43789&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;session&#39;</span><span class="p">:</span> <span class="s1">&#39;2018-2019&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;ali@gmail.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dob&#39;</span><span class="p">:</span> <span class="s1">&#39;2000-01-10&#39;</span><span class="p">,</span>  
+            <span class="s1">&#39;address&#39;</span><span class="p">:</span> <span class="s1">&#39;Dhaka&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;fathers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Hasan Ali&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;mothers_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Afroza Khatun&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;guardian_phone&#39;</span><span class="p">:</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;First year&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;Regular&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;CGPA&#39;</span><span class="p">:</span> <span class="mf">3.5</span><span class="p">,</span>
+            <span class="s1">&#39;result_description&#39;</span><span class="p">:</span> <span class="s1">&#39;Good performance&#39;</span><span class="p">,</span>
+            
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_student&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">student</span><span class="o">.</span><span class="n">pk</span><span class="p">]),</span> <span class="n">data</span><span class="o">=</span><span class="n">form_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
+
+    
+        <span class="n">updated_student</span> <span class="o">=</span> <span class="n">Student</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="n">student</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Ali Ahmed&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">hsc_reg</span><span class="p">,</span> <span class="s1">&#39;43123&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">reg_no</span><span class="p">,</span> <span class="s1">&#39;4324456&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">roll</span><span class="p">,</span> <span class="s1">&#39;43789&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">session</span><span class="p">,</span> <span class="s1">&#39;2018-2019&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="s1">&#39;ali@gmail.com&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">phone</span><span class="p">,</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">dob</span><span class="p">,</span><span class="s1">&#39;10-01-2000&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">address</span><span class="p">,</span> <span class="s1">&#39;Dhaka&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">fathers_name</span><span class="p">,</span> <span class="s1">&#39;Hasan Ali&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">mothers_name</span><span class="p">,</span> <span class="s1">&#39;Afroza Khatun&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">guardian_phone</span><span class="p">,</span> <span class="s1">&#39;9876543210&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;First year&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">status</span><span class="p">,</span> <span class="s1">&#39;Regular&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">CGPA</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_student</span><span class="o">.</span><span class="n">result_description</span><span class="p">,</span> <span class="s1">&#39;Good performance&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CreateNoticeViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateNoticeViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">CreateNoticeViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the &#39;create_notice&#39; view in the &#39;base&#39; app.</span>
+
+<span class="sd">    This test case checks the behavior of the &#39;create_notice&#39; view with valid and invalid form data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="CreateNoticeViewTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateNoticeViewTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary data for the test case.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="CreateNoticeViewTest.test_create_notice_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateNoticeViewTest.test_create_notice_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_notice_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;create_notice&#39; view with valid form data.</span>
+
+<span class="sd">        This test makes a POST request with valid form data, checks if the response redirects to the &#39;home&#39; page,</span>
+<span class="sd">        and verifies that a notice was created in the database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define the URL for the create_notice view</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_notice&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Make a POST request with valid form data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;sender&#39;</span><span class="p">:</span> <span class="s1">&#39;Admin&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;receiver&#39;</span><span class="p">:</span> <span class="s1">&#39;JohnDoe&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;subject&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Subject&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;body&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Body&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response redirects to the &#39;home&#39; page</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRedirects</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+
+        <span class="c1"># Check if a notice was created in the database</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+        <span class="c1"># Optionally, you can check other details about the created notice</span>
+
+<div class="viewcode-block" id="CreateNoticeViewTest.test_create_notice_view_invalid_form">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.CreateNoticeViewTest.test_create_notice_view_invalid_form">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_notice_view_invalid_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;create_notice&#39; view with invalid form data.</span>
+
+<span class="sd">        This test makes a POST request with invalid form data, checks if the response renders the &#39;create_notice&#39; template,</span>
+<span class="sd">        and ensures that the form in the context is an instance of AdminNoticeForm.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define the URL for the create_notice view</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_notice&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Make a POST request with invalid form data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># Missing required fields</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response renders the create_notice template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_notice.html&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Check if the form in the context is an instance of AdminNoticeForm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">],</span> <span class="n">AdminNoticeForm</span><span class="p">)</span>
+
+        <span class="c1"># Check if the notice count in the database remains unchanged</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span></div>
+</div>
+
+
+        <span class="c1"># Optionally, you can check other details about the response</span>
+
+
+
+<div class="viewcode-block" id="NoticeDetailsViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NoticeDetailsViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">NoticeDetailsViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the &#39;notice_details&#39; view in the &#39;base&#39; app.</span>
+
+<span class="sd">    This test case checks the behavior of the &#39;notice_details&#39; view with valid and invalid notice IDs.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="NoticeDetailsViewTest.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NoticeDetailsViewTest.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary data for the test case.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a sample notice for testing</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notice</span> <span class="o">=</span> <span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">sender</span><span class="o">=</span><span class="s2">&quot;Admin&quot;</span><span class="p">,</span>
+            <span class="n">receiver</span><span class="o">=</span><span class="s2">&quot;JohnDoe&quot;</span><span class="p">,</span>
+            <span class="n">subject</span><span class="o">=</span><span class="s2">&quot;Test Subject&quot;</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="s2">&quot;Test Body&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="NoticeDetailsViewTest.test_notice_details_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NoticeDetailsViewTest.test_notice_details_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_notice_details_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;notice_details&#39; view with a valid notice ID.</span>
+
+<span class="sd">        This test makes a GET request to the &#39;notice_details&#39; view, checks if the response is as expected,</span>
+<span class="sd">        and verifies that the notice in the context matches the created notice.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Define the URL for the notice_details view with the notice&#39;s ID</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;notice_details&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">notice</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+
+        <span class="c1"># Make a GET request to the notice_details view</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="c1"># Check if the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+
+        <span class="c1"># Check if the rendered template is &#39;base/notice_details.html&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/notice_details.html&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Check if the notice in the context matches the created notice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;notice&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">notice</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NoticeDetailsViewTest.test_notice_details_view_invalid_id">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.NoticeDetailsViewTest.test_notice_details_view_invalid_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_notice_details_view_invalid_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;notice_details&#39; view with an invalid notice ID.</span>
+
+<span class="sd">        This test makes a GET request to the &#39;notice_details&#39; view with an invalid ID and expects an exception.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+    <span class="c1"># Define an invalid notice ID</span>
+        <span class="n">invalid_id</span> <span class="o">=</span> <span class="mi">999</span>
+
+    <span class="c1"># Define the URL for the notice_details view with the invalid ID</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;notice_details&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="n">invalid_id</span><span class="p">])</span>
+
+    <span class="c1"># Make a GET request to the notice_details view with an invalid ID</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">AdminNotice</span><span class="o">.</span><span class="n">DoesNotExist</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span></div>
+</div>
+
+
+    <span class="c1"># No need to access the response variable here, as it&#39;s not expected to be defined</span>
+<span class="w">            </span>
+
+
+
+
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">.. module:: base.tests</span>
+<span class="sd">   :synopsis: Tests for base.</span>
+
+<span class="sd">DepartmentViewTest</span>
+<span class="sd">------------------</span>
+
+<span class="sd">.. autoclass:: base.tests.DepartmentViewTest</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :undoc-members:</span>
+<span class="sd">   :show-inheritance:</span>
+
+<span class="sd">   Tests for the create_department view.</span>
+
+<span class="sd">   This class contains test cases for the create_department view.</span>
+
+<span class="sd">   .. automethod:: test_get_create_department_view</span>
+<span class="sd">   .. automethod:: test_post_create_department_view_valid_data</span>
+
+<span class="sd">   .. note::</span>
+<span class="sd">      Replace &#39;/create_department/&#39; with the appropriate URL patterns in your application.</span>
+<span class="sd">      Adjust the expected redirect URL in the second test case accordingly.</span>
+
+<span class="sd">   .. note::</span>
+<span class="sd">      You may need to import necessary modules and set up your test environment accordingly.</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="AdminNoticeViewTests">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.AdminNoticeViewTests">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminNoticeViewTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="AdminNoticeViewTests.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.AdminNoticeViewTests.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Create a test user (optional)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Create a test notice</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notice</span> <span class="o">=</span> <span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="s1">&#39;Admin&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="o">=</span><span class="s1">&#39;Sizan&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AdminNoticeViewTests.test_update_notice_view_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.AdminNoticeViewTests.test_update_notice_view_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_notice_view_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test that the update_notice view returns a form for updating an existing notice (GET request).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>  <span class="c1"># If authentication is required</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_notice&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">notice</span><span class="o">.</span><span class="n">id</span><span class="p">])</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_notice.html&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">],</span> <span class="n">AdminNoticeForm</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">instance</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">notice</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DepartmentViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">DepartmentViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Tests for the create_department view.</span>
+<span class="sd">    </span>
+<span class="sd">    This class contains test cases for the create_department view.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DepartmentViewTest.test_get_create_department_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentViewTest.test_get_create_department_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_get_create_department_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that the create_department view renders the correct template.</span>
+
+<span class="sd">        This test checks whether the create_department view renders the </span>
+<span class="sd">        expected template when accessed via HTTP GET request.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Send a GET request to the create_department view</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/create_department/&#39;</span><span class="p">)</span>
+        
+        <span class="c1"># Assert that the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        
+        <span class="c1"># Assert that the correct template is used</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;base/create_department.html&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DepartmentViewTest.test_post_create_department_view_valid_data">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentViewTest.test_post_create_department_view_valid_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_post_create_department_view_valid_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that the create_department view redirects to the success page on valid form submission.</span>
+
+<span class="sd">        This test verifies that upon submitting a valid department creation </span>
+<span class="sd">        form via HTTP POST request, the create_department view redirects </span>
+<span class="sd">        the user to the success page.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Test data for department creation</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;123-456-7890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;A test department for testing purposes.&#39;</span><span class="p">,</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Send a POST request with valid form data to the create_department view</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">&#39;/create_department/&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        
+        <span class="c1"># Assert that the response status code is 302 (redirect)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>
+        
+        <span class="c1"># Assert that the response redirects to the expected URL (replace with your success page)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertRedirects</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s1">&#39;/create_department/&#39;</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="sd">DepartmentInfoViewTest</span>
+<span class="sd">-----------------------</span>
+
+<span class="sd">Test cases for the Department info view.</span>
+
+<span class="sd">.. automodule:: base.tests</span>
+<span class="sd">   :members:</span>
+<span class="sd">   :undoc-members:</span>
+<span class="sd">   :show-inheritance:</span>
+
+<span class="sd">    DepartmentInfoViewTest.setUpTestData</span>
+<span class="sd">    ------------------------------------</span>
+
+<span class="sd">    Set up test data for Department info view tests.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        def setUpTestData(cls):</span>
+<span class="sd">            cls.department = Department.objects.create(</span>
+<span class="sd">                name=&quot;IT&quot;,</span>
+<span class="sd">                location=&quot;Block D&quot;,</span>
+<span class="sd">                rank=1,</span>
+<span class="sd">                phone=&quot;555-9012&quot;,</span>
+<span class="sd">                email=&quot;it@company.com&quot;,</span>
+<span class="sd">                description=&quot;Provides technical support and infrastructure.&quot;,</span>
+<span class="sd">            )</span>
+
+<span class="sd">    DepartmentInfoViewTest.test_department_info_view_successful_response</span>
+<span class="sd">    ----------------------------------------------------------------------</span>
+
+<span class="sd">    Tests that the department info view returns a successful HTTP response</span>
+<span class="sd">    with the correct context for a valid department ID.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        def test_department_info_view_successful_response(self):</span>
+<span class="sd">            response = self.client.get(f&quot;/department_info/{self.department.pk}/&quot;)</span>
+<span class="sd">            self.assertEqual(response.status_code, 200)</span>
+<span class="sd">            self.assertTrue(&#39;dept&#39; in response.context)</span>
+<span class="sd">            self.assertEqual(response.context[&#39;dept&#39;], self.department)</span>
+
+<span class="sd">    DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id</span>
+<span class="sd">    ---------------------------------------------------------------------</span>
+
+<span class="sd">    Tests that the department info view returns a 404 Not Found status code</span>
+<span class="sd">    for an invalid department ID.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        def test_department_info_view_404_for_invalid_id(self):</span>
+<span class="sd">            response = self.client.get(&quot;/department/999/&quot;)</span>
+<span class="sd">            self.assertEqual(response.status_code, 404)</span>
+
+<span class="sd">    DepartmentInfoViewTest.test_department_info_view_template_used</span>
+<span class="sd">    ---------------------------------------------------------------------</span>
+
+<span class="sd">    Tests that the department info view renders the expected template.</span>
+
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        def test_department_info_view_template_used(self):</span>
+<span class="sd">            response = self.client.get(f&quot;/department_info/{self.department.pk}/&quot;)</span>
+<span class="sd">            self.assertTemplateUsed(response, &quot;base/department_info.html&quot;)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+
+<div class="viewcode-block" id="DepartmentInfoViewTest">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentInfoViewTest">[docs]</a>
+<span class="k">class</span> <span class="nc">DepartmentInfoViewTest</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test cases for the Department info view.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DepartmentInfoViewTest.setUpTestData">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentInfoViewTest.setUpTestData">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">setUpTestData</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up test data for Department info view tests.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;IT&quot;</span><span class="p">,</span>
+            <span class="n">location</span><span class="o">=</span><span class="s2">&quot;Block D&quot;</span><span class="p">,</span>
+            <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">phone</span><span class="o">=</span><span class="s2">&quot;555-9012&quot;</span><span class="p">,</span>
+            <span class="n">email</span><span class="o">=</span><span class="s2">&quot;it@company.com&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Provides technical support and infrastructure.&quot;</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DepartmentInfoViewTest.test_department_info_view_successful_response">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_successful_response">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_department_info_view_successful_response</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that the department info view returns a successful HTTP response</span>
+<span class="sd">        with the correct context for a valid department ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Make a GET request to the department_info view using the department&#39;s primary key</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/department_info/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+      
+        <span class="c1"># Assert that the response status code is 200 (OK)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="c1"># Assert that the &#39;dept&#39; object is present in the response context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="s1">&#39;dept&#39;</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">)</span>
+        <span class="c1"># Assert that the &#39;dept&#39; object in the context matches the created department</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;dept&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="p">)</span></div>
+
+    
+    
+<div class="viewcode-block" id="DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_department_info_view_404_for_invalid_id</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that the department info view returns a 404 Not Found status code</span>
+<span class="sd">        for an invalid department ID.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Make a GET request to a non-existent department ID</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/department/999/&quot;</span><span class="p">)</span>
+        <span class="c1"># Assert that the response status code is 404 (Not Found)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">404</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DepartmentInfoViewTest.test_department_info_view_template_used">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_template_used">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_department_info_view_template_used</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that the department info view renders the expected template.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Make a GET request to the department_info view using the department&#39;s primary key</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/department_info/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+        <span class="c1"># Assert that the response uses the expected template</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTemplateUsed</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="s2">&quot;base/department_info.html&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+
+
+
+
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: base.tests</span>
+<span class="sd">   :synopsis: Tests for the base app.</span>
+
+<span class="sd">DepartmentUpdateViewTests</span>
+<span class="sd">-------------------------</span>
+
+<span class="sd">Tests for the Department update view.</span>
+
+<span class="sd">.. autoclass:: base.tests.DepartmentUpdateViewTests</span>
+<span class="sd">   :members:</span>
+
+<span class="sd">   TestCase for testing the Department update view.</span>
+
+<span class="sd">   .. automethod:: setUp</span>
+
+<span class="sd">   .. automethod:: test_update_department_get</span>
+
+<span class="sd">   .. automethod:: test_update_department_post_invalid</span>
+
+<span class="sd">   .. automethod:: test_update_department_post_valid</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+
+<div class="viewcode-block" id="DepartmentUpdateViewTests">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentUpdateViewTests">[docs]</a>
+<span class="k">class</span> <span class="nc">DepartmentUpdateViewTests</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TestCase for testing the Department update view.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="DepartmentUpdateViewTests.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentUpdateViewTests.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up initial data for the tests.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">force_login</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Test Department&#39;</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s1">&#39;Block A&#39;</span><span class="p">,</span> <span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="s1">&#39;1234567890&#39;</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;Test Description&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DepartmentUpdateViewTests.test_update_department_get">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentUpdateViewTests.test_update_department_get">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_department_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the GET request to update a department.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_department&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="p">})</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertIsInstance</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">],</span> <span class="n">DepartmentForm</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DepartmentUpdateViewTests.test_update_department_post_invalid">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_invalid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_department_post_invalid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the POST request with invalid data to update a department.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_department&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="p">})</span>
+        <span class="n">invalid_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>  <span class="c1"># Name field is required, providing empty string here</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block A&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Test Description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">invalid_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">is_valid</span><span class="p">())</span>  <span class="c1"># Form should be invalid</span></div>
+
+
+<div class="viewcode-block" id="DepartmentUpdateViewTests.test_update_department_post_valid">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_valid">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_department_post_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the POST request with valid data to update a department.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_department&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="p">})</span>
+        <span class="n">valid_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated Department&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;location&#39;</span><span class="p">:</span> <span class="s1">&#39;Block B&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rank&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;1234567890&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;test@example.com&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Updated Description&#39;</span>
+        <span class="p">}</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">valid_data</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">302</span><span class="p">)</span>  <span class="c1"># Redirect after successful form submission</span>
+        <span class="n">updated_department</span> <span class="o">=</span> <span class="n">Department</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">pk</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">department</span><span class="o">.</span><span class="n">pk</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;Updated Department&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">location</span><span class="p">,</span> <span class="s1">&#39;Block B&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">updated_department</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s1">&#39;Updated Description&#39;</span><span class="p">)</span></div>
+</div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

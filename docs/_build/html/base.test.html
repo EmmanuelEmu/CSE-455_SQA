@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.test package &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8d563738"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">base.test package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/base.test.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="base-test-package">
+<h1>base.test package<a class="headerlink" href="#base-test-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-base.test.test_filters">
+<span id="base-test-test-filters-module"></span><h2>base.test.test_filters module<a class="headerlink" href="#module-base.test.test_filters" title="Link to this heading"></a></h2>
+</section>
+<section id="module-base.test.test_forms">
+<span id="base-test-test-forms-module"></span><h2>base.test.test_forms module<a class="headerlink" href="#module-base.test.test_forms" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.AdminNoticeFormTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">AdminNoticeFormTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#AdminNoticeFormTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.AdminNoticeFormTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_invalid_data">
+<span class="sig-name descname"><span class="pre">test_admin_notice_form_invalid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#AdminNoticeFormTest.test_admin_notice_form_invalid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_invalid_data" title="Link to this definition"></a></dt>
+<dd><p>Test case to check the validity of AdminNoticeForm with invalid data.</p>
+<p>This test checks if the form is invalid when provided with invalid notice data,
+specifically an empty subject (assuming it’s required).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_valid_data">
+<span class="sig-name descname"><span class="pre">test_admin_notice_form_valid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#AdminNoticeFormTest.test_admin_notice_form_valid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.AdminNoticeFormTest.test_admin_notice_form_valid_data" title="Link to this definition"></a></dt>
+<dd><p>Test case to check the validity of AdminNoticeForm with valid data.</p>
+<p>This test checks if the form is valid when provided with valid notice data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.CreateUserFormTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">CreateUserFormTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#CreateUserFormTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.CreateUserFormTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.CreateUserFormTest.test_create_user_form_invalid_data">
+<span class="sig-name descname"><span class="pre">test_create_user_form_invalid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#CreateUserFormTest.test_create_user_form_invalid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.CreateUserFormTest.test_create_user_form_invalid_data" title="Link to this definition"></a></dt>
+<dd><p>Test case to check the validity of CreateUserForm with invalid data.</p>
+<p>This test checks if the form is invalid when provided with invalid user data,
+specifically an invalid email format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.CreateUserFormTest.test_create_user_form_valid_data">
+<span class="sig-name descname"><span class="pre">test_create_user_form_valid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#CreateUserFormTest.test_create_user_form_valid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.CreateUserFormTest.test_create_user_form_valid_data" title="Link to this definition"></a></dt>
+<dd><p>Test case to check the validity of CreateUserForm with valid data.</p>
+<p>This test checks if the form is valid when provided with valid user data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.StudentFormTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">StudentFormTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#StudentFormTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.StudentFormTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.StudentFormTestCase.test_student_form_invalid">
+<span class="sig-name descname"><span class="pre">test_student_form_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#StudentFormTestCase.test_student_form_invalid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.StudentFormTestCase.test_student_form_invalid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.StudentFormTestCase.test_student_form_valid">
+<span class="sig-name descname"><span class="pre">test_student_form_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#StudentFormTestCase.test_student_form_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.StudentFormTestCase.test_student_form_valid" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.TeacherFormTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">TeacherFormTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TeacherFormTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TeacherFormTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TeacherFormTest.test_invalid_teacher_form">
+<span class="sig-name descname"><span class="pre">test_invalid_teacher_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TeacherFormTest.test_invalid_teacher_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TeacherFormTest.test_invalid_teacher_form" title="Link to this definition"></a></dt>
+<dd><p>Test invalid TeacherForm</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TeacherFormTest.test_valid_teacher_form">
+<span class="sig-name descname"><span class="pre">test_valid_teacher_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TeacherFormTest.test_valid_teacher_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TeacherFormTest.test_valid_teacher_form" title="Link to this definition"></a></dt>
+<dd><p>Test valid TeacherForm</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.TestDepartmentForm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">TestDepartmentForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestDepartmentForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestDepartmentForm" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Unit tests for the DepartmentForm class.</p>
+<p>This class contains test cases for validating the functionality of the DepartmentForm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TestDepartmentForm.test_invalid_form">
+<span class="sig-name descname"><span class="pre">test_invalid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestDepartmentForm.test_invalid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestDepartmentForm.test_invalid_form" title="Link to this definition"></a></dt>
+<dd><p>Test if form is invalid when required fields are missing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TestDepartmentForm.test_save_form">
+<span class="sig-name descname"><span class="pre">test_save_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestDepartmentForm.test_save_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestDepartmentForm.test_save_form" title="Link to this definition"></a></dt>
+<dd><p>Test if form saves the data correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TestDepartmentForm.test_update_form">
+<span class="sig-name descname"><span class="pre">test_update_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestDepartmentForm.test_update_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestDepartmentForm.test_update_form" title="Link to this definition"></a></dt>
+<dd><p>Test if form updates the data correctly.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TestDepartmentForm.test_valid_form">
+<span class="sig-name descname"><span class="pre">test_valid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestDepartmentForm.test_valid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestDepartmentForm.test_valid_form" title="Link to this definition"></a></dt>
+<dd><p>Test if the form is valid when all required fields are provided.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_forms.TestForms">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_forms.</span></span><span class="sig-name descname"><span class="pre">TestForms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestForms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestForms" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for form validation.</p>
+<p>Inherits from:
+- TestCase: Django’s built-in test case class.</p>
+<p>Methods:
+- test_create_user_form_valid_data: Method to test the validation of CreateUserForm with valid data.</p>
+<p>Usage:
+This test case is designed to test the validation of forms focusing on the CreateUserForm.</p>
+<p>Dependencies:
+- Django must be properly installed in the project.
+- TestCase class should be imported from ‘django.test’.
+- CreateUserForm class should be imported from the appropriate module.</p>
+<p>Notes:
+The test case includes a method to test the validation of CreateUserForm with valid data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_forms.TestForms.test_create_user_form_valid_data">
+<span class="sig-name descname"><span class="pre">test_create_user_form_valid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_forms.html#TestForms.test_create_user_form_valid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_forms.TestForms.test_create_user_form_valid_data" title="Link to this definition"></a></dt>
+<dd><p>Test the validation of CreateUserForm with valid data.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-base.test.test_models">
+<span id="base-test-test-models-module"></span><h2>base.test.test_models module<a class="headerlink" href="#module-base.test.test_models" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_models.AdminNoticeModelTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_models.</span></span><span class="sig-name descname"><span class="pre">AdminNoticeModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#AdminNoticeModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.AdminNoticeModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.AdminNoticeModelTest.test_admin_notice_creation">
+<span class="sig-name descname"><span class="pre">test_admin_notice_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#AdminNoticeModelTest.test_admin_notice_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.AdminNoticeModelTest.test_admin_notice_creation" title="Link to this definition"></a></dt>
+<dd><p>Test case to ensure the creation and behavior of the AdminNotice model.</p>
+<p>This test creates a sample AdminNotice instance, checks the __str__ method,
+and verifies if the fields were saved correctly. It also ensures that the
+date_sent is not in the future.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_models.DepartmentModelTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_models.</span></span><span class="sig-name descname"><span class="pre">DepartmentModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#DepartmentModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.DepartmentModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test cases for the Department model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.DepartmentModelTest.setUpTestData">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#DepartmentModelTest.setUpTestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.DepartmentModelTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for Department model tests.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.DepartmentModelTest.test_department_creation">
+<span class="sig-name descname"><span class="pre">test_department_creation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#DepartmentModelTest.test_department_creation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.DepartmentModelTest.test_department_creation" title="Link to this definition"></a></dt>
+<dd><p>Tests the creation of a department object with valid data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.DepartmentModelTest.test_department_string_representation">
+<span class="sig-name descname"><span class="pre">test_department_string_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#DepartmentModelTest.test_department_string_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.DepartmentModelTest.test_department_string_representation" title="Link to this definition"></a></dt>
+<dd><p>Tests the string representation of the department object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_models.StudentModelTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_models.</span></span><span class="sig-name descname"><span class="pre">StudentModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#StudentModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.StudentModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.StudentModelTest.test_create_student">
+<span class="sig-name descname"><span class="pre">test_create_student</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#StudentModelTest.test_create_student"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.StudentModelTest.test_create_student" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_models.TeacherModelTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_models.</span></span><span class="sig-name descname"><span class="pre">TeacherModelTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#TeacherModelTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.TeacherModelTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.TeacherModelTest.setUpTestData">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#TeacherModelTest.setUpTestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.TeacherModelTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Load initial data for the TestCase.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_models.TeacherModelTest.test_teacher_str_representation">
+<span class="sig-name descname"><span class="pre">test_teacher_str_representation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_models.html#TeacherModelTest.test_teacher_str_representation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_models.TeacherModelTest.test_teacher_str_representation" title="Link to this definition"></a></dt>
+<dd><p>Test Teacher model string representation</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-base.test.test_urls">
+<span id="base-test-test-urls-module"></span><h2>base.test.test_urls module<a class="headerlink" href="#module-base.test.test_urls" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUpdateTeacherURL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_urls.</span></span><span class="sig-name descname"><span class="pre">TestUpdateTeacherURL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUpdateTeacherURL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUpdateTeacherURL" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUpdateTeacherURL.test_update_teacher_url_resolves">
+<span class="sig-name descname"><span class="pre">test_update_teacher_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUpdateTeacherURL.test_update_teacher_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUpdateTeacherURL.test_update_teacher_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_urls.</span></span><span class="sig-name descname"><span class="pre">TestUrls</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_common_page_url_resolves">
+<span class="sig-name descname"><span class="pre">test_common_page_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_common_page_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_common_page_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_create_department_url_resolves">
+<span class="sig-name descname"><span class="pre">test_create_department_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_create_department_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_create_department_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_create_student_url_resolves">
+<span class="sig-name descname"><span class="pre">test_create_student_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_create_student_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_create_student_url_resolves" title="Link to this definition"></a></dt>
+<dd><p>Test case to verify that the ‘create_student’ URL resolves to the correct view function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_create_teacher_url_resolves">
+<span class="sig-name descname"><span class="pre">test_create_teacher_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_create_teacher_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_create_teacher_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_home_url_resolves">
+<span class="sig-name descname"><span class="pre">test_home_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_home_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_home_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_student_info_url_resolves">
+<span class="sig-name descname"><span class="pre">test_student_info_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_student_info_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_student_info_url_resolves" title="Link to this definition"></a></dt>
+<dd><p>Test case to verify that the ‘student_info’ URL with an argument resolves to the correct view function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_teacher_info_url_resolves">
+<span class="sig-name descname"><span class="pre">test_teacher_info_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_teacher_info_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_teacher_info_url_resolves" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.TestUrls.test_update_student_url_resolves">
+<span class="sig-name descname"><span class="pre">test_update_student_url_resolves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#TestUrls.test_update_student_url_resolves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.TestUrls.test_update_student_url_resolves" title="Link to this definition"></a></dt>
+<dd><p>Test if the update_student URL resolves correctly.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_urls.</span></span><span class="sig-name descname"><span class="pre">UrlsTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the URL patterns and views in your Django application.</p>
+<p>This test case covers various views such as ‘common_page’, ‘home’,
+‘create_notice’, and ‘notice_details’.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up necessary data for the test case.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase.test_common_page_view">
+<span class="sig-name descname"><span class="pre">test_common_page_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase.test_common_page_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase.test_common_page_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘common_page’ view.</p>
+<p>This test checks if the ‘common_page’ view returns a status code of 200.
+Additional assertions can be added based on the behavior of the view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase.test_create_notice_view">
+<span class="sig-name descname"><span class="pre">test_create_notice_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase.test_create_notice_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase.test_create_notice_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘create_notice’ view.</p>
+<p>This test logs in the test user and checks if the ‘create_notice’ view returns a status code of 200.
+Additional assertions can be added based on the behavior of the view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase.test_home_view">
+<span class="sig-name descname"><span class="pre">test_home_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase.test_home_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase.test_home_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘home’ view.</p>
+<p>This test logs in the test user and checks if the ‘home’ view returns a status code of 200.
+Additional assertions can be added based on the behavior of the view.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_urls.UrlsTestCase.test_notice_details_view">
+<span class="sig-name descname"><span class="pre">test_notice_details_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_urls.html#UrlsTestCase.test_notice_details_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_urls.UrlsTestCase.test_notice_details_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘notice_details’ view.</p>
+<p>This test checks if the ‘notice_details’ view returns a status code of 200.
+Additional assertions can be added based on the behavior of the view.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-base.test.test_views">
+<span id="base-test-test-views-module"></span><h2>base.test.test_views module<a class="headerlink" href="#module-base.test.test_views" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.AdminNoticeViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">AdminNoticeViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#AdminNoticeViewTests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.AdminNoticeViewTests" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.AdminNoticeViewTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#AdminNoticeViewTests.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.AdminNoticeViewTests.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.AdminNoticeViewTests.test_update_notice_view_get">
+<span class="sig-name descname"><span class="pre">test_update_notice_view_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#AdminNoticeViewTests.test_update_notice_view_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.AdminNoticeViewTests.test_update_notice_view_get" title="Link to this definition"></a></dt>
+<dd><p>Test that the update_notice view returns a form for updating an existing notice (GET request).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.CreateNoticeViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">CreateNoticeViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateNoticeViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateNoticeViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the ‘create_notice’ view in the ‘base’ app.</p>
+<p>This test case checks the behavior of the ‘create_notice’ view with valid and invalid form data.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateNoticeViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateNoticeViewTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateNoticeViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up necessary data for the test case.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateNoticeViewTest.test_create_notice_view">
+<span class="sig-name descname"><span class="pre">test_create_notice_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateNoticeViewTest.test_create_notice_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateNoticeViewTest.test_create_notice_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘create_notice’ view with valid form data.</p>
+<p>This test makes a POST request with valid form data, checks if the response redirects to the ‘home’ page,
+and verifies that a notice was created in the database.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateNoticeViewTest.test_create_notice_view_invalid_form">
+<span class="sig-name descname"><span class="pre">test_create_notice_view_invalid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateNoticeViewTest.test_create_notice_view_invalid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateNoticeViewTest.test_create_notice_view_invalid_form" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘create_notice’ view with invalid form data.</p>
+<p>This test makes a POST request with invalid form data, checks if the response renders the ‘create_notice’ template,
+and ensures that the form in the context is an instance of AdminNoticeForm.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.CreateTeacherViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">CreateTeacherViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateTeacherViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateTeacherViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateTeacherViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateTeacherViewTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateTeacherViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateTeacherViewTest.test_create_teacher_get">
+<span class="sig-name descname"><span class="pre">test_create_teacher_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateTeacherViewTest.test_create_teacher_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateTeacherViewTest.test_create_teacher_get" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateTeacherViewTest.test_create_teacher_invalid_form">
+<span class="sig-name descname"><span class="pre">test_create_teacher_invalid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateTeacherViewTest.test_create_teacher_invalid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateTeacherViewTest.test_create_teacher_invalid_form" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.CreateTeacherViewTest.test_create_teacher_post">
+<span class="sig-name descname"><span class="pre">test_create_teacher_post</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#CreateTeacherViewTest.test_create_teacher_post"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.CreateTeacherViewTest.test_create_teacher_post" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.DeleteStudentTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">DeleteStudentTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DeleteStudentTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DeleteStudentTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the delete_student.</p>
+<p>Inherits:
+- TestCase: Django’s built-in test case class.</p>
+<p>Attributes:
+- student1: Sample instance of the Student model for testing.</p>
+<p>Methods:
+- setUp: Method to set up sample data for testing.
+- test_delete_student_view: Method to test the functionality of the DeleteStudent view.</p>
+<p>Usage:
+This test case is designed to test the functionality of the DeleteStudent view, including rendering
+and the deletion of a student.</p>
+<p>Django Models:
+- Student: The Django model representing student information.</p>
+<p>Dependencies:
+- Django must be properly installed in the project.
+- TestCase class should be imported from ‘django.test’.
+- Client class and reverse function should be imported from ‘django.test.client’.</p>
+<p>Notes:
+The test case sets up sample data with one student instance and tests the rendering and deletion
+functionality of the delete_student view using Django’s test client.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DeleteStudentTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DeleteStudentTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DeleteStudentTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up sample data for testing.</p>
+<p>Sphinx Tags:
+- :student1: Sample instance of the Student model for testing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DeleteStudentTest.test_delete_student_view">
+<span class="sig-name descname"><span class="pre">test_delete_student_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DeleteStudentTest.test_delete_student_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DeleteStudentTest.test_delete_student_view" title="Link to this definition"></a></dt>
+<dd><p>Test the functionality of the delete_student view.</p>
+<p>Sphinx Tags:
+- :student1: Sample instance of the Student model for testing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentInfoViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">DepartmentInfoViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentInfoViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentInfoViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test cases for the Department info view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentInfoViewTest.setUpTestData">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">setUpTestData</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentInfoViewTest.setUpTestData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentInfoViewTest.setUpTestData" title="Link to this definition"></a></dt>
+<dd><p>Set up test data for Department info view tests.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id">
+<span class="sig-name descname"><span class="pre">test_department_info_view_404_for_invalid_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_404_for_invalid_id" title="Link to this definition"></a></dt>
+<dd><p>Tests that the department info view returns a 404 Not Found status code
+for an invalid department ID.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentInfoViewTest.test_department_info_view_successful_response">
+<span class="sig-name descname"><span class="pre">test_department_info_view_successful_response</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentInfoViewTest.test_department_info_view_successful_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_successful_response" title="Link to this definition"></a></dt>
+<dd><p>Tests that the department info view returns a successful HTTP response
+with the correct context for a valid department ID.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentInfoViewTest.test_department_info_view_template_used">
+<span class="sig-name descname"><span class="pre">test_department_info_view_template_used</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentInfoViewTest.test_department_info_view_template_used"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentInfoViewTest.test_department_info_view_template_used" title="Link to this definition"></a></dt>
+<dd><p>Tests that the department info view renders the expected template.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentUpdateViewTests">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">DepartmentUpdateViewTests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentUpdateViewTests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentUpdateViewTests" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>TestCase for testing the Department update view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentUpdateViewTests.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentUpdateViewTests.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentUpdateViewTests.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up initial data for the tests.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentUpdateViewTests.test_update_department_get">
+<span class="sig-name descname"><span class="pre">test_update_department_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentUpdateViewTests.test_update_department_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentUpdateViewTests.test_update_department_get" title="Link to this definition"></a></dt>
+<dd><p>Test the GET request to update a department.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_invalid">
+<span class="sig-name descname"><span class="pre">test_update_department_post_invalid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentUpdateViewTests.test_update_department_post_invalid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_invalid" title="Link to this definition"></a></dt>
+<dd><p>Test the POST request with invalid data to update a department.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_valid">
+<span class="sig-name descname"><span class="pre">test_update_department_post_valid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentUpdateViewTests.test_update_department_post_valid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentUpdateViewTests.test_update_department_post_valid" title="Link to this definition"></a></dt>
+<dd><p>Test the POST request with valid data to update a department.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">DepartmentViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Tests for the create_department view.</p>
+<p>This class contains test cases for the create_department view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentViewTest.test_get_create_department_view">
+<span class="sig-name descname"><span class="pre">test_get_create_department_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentViewTest.test_get_create_department_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentViewTest.test_get_create_department_view" title="Link to this definition"></a></dt>
+<dd><p>Tests that the create_department view renders the correct template.</p>
+<p>This test checks whether the create_department view renders the 
+expected template when accessed via HTTP GET request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.DepartmentViewTest.test_post_create_department_view_valid_data">
+<span class="sig-name descname"><span class="pre">test_post_create_department_view_valid_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#DepartmentViewTest.test_post_create_department_view_valid_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.DepartmentViewTest.test_post_create_department_view_valid_data" title="Link to this definition"></a></dt>
+<dd><p>Tests that the create_department view redirects to the success page on valid form submission.</p>
+<p>This test verifies that upon submitting a valid department creation 
+form via HTTP POST request, the create_department view redirects 
+the user to the success page.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.NavStuListTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">NavStuListTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NavStuListTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NavStuListTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the nav_stu_list.</p>
+<p>Inherits from:
+- TestCase: Django’s built-in test case class.</p>
+<p>Attributes:
+- student1: Sample instance of the Student model for testing.
+- student2: Sample instance of the Student model for testing.
+- student3: Sample instance of the Student model for testing.</p>
+<p>Methods:
+- setUp: Method to set up sample data for testing.
+- test_nav_stu_list_view: Method to test the functionality of the nav_stu_list view.</p>
+<p>Usage:
+This test case is designed to test the functionality of the nav_stu_list view including basic rendering
+and filtering.</p>
+<p>Django Models:
+- Student: The Django model representing student information.</p>
+<p>Dependencies:
+- Django must be properly installed in the project.
+- TestCase class should be imported from ‘django.test’.
+- Client class and reverse function should be imported from ‘django.test.client’.
+- Student model should be imported from the appropriate module.</p>
+<p>Notes:
+The test case sets up sample data with three student instances and tests the rendering and filtering
+functionality of the NavStuList view using Django’s test client.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.NavStuListTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NavStuListTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NavStuListTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up sample data for testing.</p>
+<p>Sphinx Tags:
+- :student1: Sample instance of the Student model for testing.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.NavStuListTest.test_nav_stu_list_view">
+<span class="sig-name descname"><span class="pre">test_nav_stu_list_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NavStuListTest.test_nav_stu_list_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NavStuListTest.test_nav_stu_list_view" title="Link to this definition"></a></dt>
+<dd><p>Test the functionality of the nav_stu_list view.</p>
+<p>Sphinx Tags:
+- :student1: Sample instance of the Student model for testing.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.NoticeDetailsViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">NoticeDetailsViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NoticeDetailsViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NoticeDetailsViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the ‘notice_details’ view in the ‘base’ app.</p>
+<p>This test case checks the behavior of the ‘notice_details’ view with valid and invalid notice IDs.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.NoticeDetailsViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NoticeDetailsViewTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NoticeDetailsViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up necessary data for the test case.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.NoticeDetailsViewTest.test_notice_details_view">
+<span class="sig-name descname"><span class="pre">test_notice_details_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NoticeDetailsViewTest.test_notice_details_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NoticeDetailsViewTest.test_notice_details_view" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘notice_details’ view with a valid notice ID.</p>
+<p>This test makes a GET request to the ‘notice_details’ view, checks if the response is as expected,
+and verifies that the notice in the context matches the created notice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.NoticeDetailsViewTest.test_notice_details_view_invalid_id">
+<span class="sig-name descname"><span class="pre">test_notice_details_view_invalid_id</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#NoticeDetailsViewTest.test_notice_details_view_invalid_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.NoticeDetailsViewTest.test_notice_details_view_invalid_id" title="Link to this definition"></a></dt>
+<dd><p>Test the ‘notice_details’ view with an invalid notice ID.</p>
+<p>This test makes a GET request to the ‘notice_details’ view with an invalid ID and expects an exception.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.StudentViewsTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">StudentViewsTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#StudentViewsTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.StudentViewsTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.StudentViewsTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#StudentViewsTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.StudentViewsTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.StudentViewsTest.test_studentinfo_get_request">
+<span class="sig-name descname"><span class="pre">test_studentinfo_get_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#StudentViewsTest.test_studentinfo_get_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.StudentViewsTest.test_studentinfo_get_request" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherInfoViewTest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TeacherInfoViewTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherInfoViewTest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherInfoViewTest" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherInfoViewTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherInfoViewTest.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherInfoViewTest.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherInfoViewTest.test_teacher_info_view">
+<span class="sig-name descname"><span class="pre">test_teacher_info_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherInfoViewTest.test_teacher_info_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherInfoViewTest.test_teacher_info_view" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherUpdateTestCase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TeacherUpdateTestCase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherUpdateTestCase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherUpdateTestCase" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherUpdateTestCase.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherUpdateTestCase.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherUpdateTestCase.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherUpdateTestCase.test_update_teacher">
+<span class="sig-name descname"><span class="pre">test_update_teacher</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherUpdateTestCase.test_update_teacher"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherUpdateTestCase.test_update_teacher" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TeacherUpdateTestCase.test_update_teacher_invalid_form">
+<span class="sig-name descname"><span class="pre">test_update_teacher_invalid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TeacherUpdateTestCase.test_update_teacher_invalid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TeacherUpdateTestCase.test_update_teacher_invalid_form" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestCommonPageView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestCommonPageView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCommonPageView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCommonPageView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestCommonPageView.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCommonPageView.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCommonPageView.setUp" title="Link to this definition"></a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestCommonPageView.test_common_page_view">
+<span class="sig-name descname"><span class="pre">test_common_page_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCommonPageView.test_common_page_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCommonPageView.test_common_page_view" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestCreateStudentView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestCreateStudentView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCreateStudentView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCreateStudentView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestCreateStudentView.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCreateStudentView.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCreateStudentView.setUp" title="Link to this definition"></a></dt>
+<dd><p>Setup method to initialize the test client.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestCreateStudentView.test_create_student_view_get">
+<span class="sig-name descname"><span class="pre">test_create_student_view_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCreateStudentView.test_create_student_view_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCreateStudentView.test_create_student_view_get" title="Link to this definition"></a></dt>
+<dd><p>Test case to verify that the create student view returns a status code of 200 and uses the correct template for GET request.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestCreateStudentView.test_create_student_view_post_valid_form">
+<span class="sig-name descname"><span class="pre">test_create_student_view_post_valid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestCreateStudentView.test_create_student_view_post_valid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestCreateStudentView.test_create_student_view_post_valid_form" title="Link to this definition"></a></dt>
+<dd><p>Test case to verify that the create student view successfully creates a student object with valid form data.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestLoginAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestLoginAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLoginAdmin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLoginAdmin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the login_admin view.</p>
+<p>Methods:
+- setUp(): Set up necessary variables for testing.
+- test_login_admin_view_incorrect_credentials(): Test the login_admin view with incorrect credentials.
+- test_login_admin_view_correct_credentials(): Test the login_admin view with correct credentials.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestLoginAdmin.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLoginAdmin.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLoginAdmin.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up necessary variables for testing.</p>
+<p>Creates a test user for login attempts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestLoginAdmin.test_login_admin_view_correct_credentials">
+<span class="sig-name descname"><span class="pre">test_login_admin_view_correct_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLoginAdmin.test_login_admin_view_correct_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLoginAdmin.test_login_admin_view_correct_credentials" title="Link to this definition"></a></dt>
+<dd><p>Test the login_admin view with correct credentials.</p>
+<p>Simulates a login attempt with correct credentials and asserts the successful redirection to the home page.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestLoginAdmin.test_login_admin_view_incorrect_credentials">
+<span class="sig-name descname"><span class="pre">test_login_admin_view_incorrect_credentials</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLoginAdmin.test_login_admin_view_incorrect_credentials"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLoginAdmin.test_login_admin_view_incorrect_credentials" title="Link to this definition"></a></dt>
+<dd><p>Test the login_admin view with incorrect credentials.</p>
+<p>Simulates a login attempt with incorrect credentials and asserts the response status code and error message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestLogoutAdmin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestLogoutAdmin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLogoutAdmin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLogoutAdmin" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the logout_user view.</p>
+<p>Methods:
+- test_logout_user_view(): Test the logout_user view.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestLogoutAdmin.test_logout_user_view">
+<span class="sig-name descname"><span class="pre">test_logout_user_view</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestLogoutAdmin.test_logout_user_view"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestLogoutAdmin.test_logout_user_view" title="Link to this definition"></a></dt>
+<dd><p>Test the logout_user view.</p>
+<p>Simulates a GET request to the logout_user view and asserts the response status code.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestRegister">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestRegister</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestRegister"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestRegister" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the register view.</p>
+<p>Methods:
+- setUp(): Set up necessary variables for testing.
+- test_register_view_get(): Test the GET request to the register view.
+- test_register_view_post_valid_form(): Test the POST request to the register view with a valid form.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestRegister.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestRegister.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestRegister.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up necessary variables for testing.</p>
+<p>Creates a test client and defines the register and login URLs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestRegister.test_register_view_get">
+<span class="sig-name descname"><span class="pre">test_register_view_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestRegister.test_register_view_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestRegister.test_register_view_get" title="Link to this definition"></a></dt>
+<dd><p>Test the GET request to the register view.</p>
+<p>Simulates a GET request to the register view and asserts the response status code and template used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestRegister.test_register_view_post_valid_form">
+<span class="sig-name descname"><span class="pre">test_register_view_post_valid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestRegister.test_register_view_post_valid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestRegister.test_register_view_post_valid_form" title="Link to this definition"></a></dt>
+<dd><p>Test the POST request to the register view with a valid form.</p>
+<p>Simulates a POST request to the register view with valid form data and asserts the redirection to the login page.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="base.test.test_views.TestUpdateStudentView">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">base.test.test_views.</span></span><span class="sig-name descname"><span class="pre">TestUpdateStudentView</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestUpdateStudentView"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestUpdateStudentView" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Test case for the update_student view.</p>
+<dl class="simple">
+<dt>Methods:</dt><dd><p>setUp(self): Prepares the test environment before each test method is run.
+test_update_student_view_get(self): Tests the GET request to the update_student view.
+test_update_student_view_post_valid_form(self): Tests the POST request with valid form data.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestUpdateStudentView.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestUpdateStudentView.setUp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestUpdateStudentView.setUp" title="Link to this definition"></a></dt>
+<dd><p>Set up the test environment.</p>
+<p>This method is called before each test method to set up any necessary preconditions.
+It initializes the test client.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestUpdateStudentView.test_update_student_view_get">
+<span class="sig-name descname"><span class="pre">test_update_student_view_get</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestUpdateStudentView.test_update_student_view_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestUpdateStudentView.test_update_student_view_get" title="Link to this definition"></a></dt>
+<dd><p>Test the GET request to the update_student view.</p>
+<p>Checks if the view returns a status code of 200 and uses the correct template.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="base.test.test_views.TestUpdateStudentView.test_update_student_view_post_valid_form">
+<span class="sig-name descname"><span class="pre">test_update_student_view_post_valid_form</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/base/test/test_views.html#TestUpdateStudentView.test_update_student_view_post_valid_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#base.test.test_views.TestUpdateStudentView.test_update_student_view_post_valid_form" title="Link to this definition"></a></dt>
+<dd><p>Test the POST request with valid form data.</p>
+<p>Checks if the view updates the student record correctly and redirects after a successful update.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-base.test">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-base.test" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

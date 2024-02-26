@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>base.test.test_urls &mdash; SQA_SMS 1.0.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=8d563738"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            SQA_SMS
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Base App</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SQA_SMS</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">base.test.test_urls</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for base.test.test_urls</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">SimpleTestCase</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span><span class="p">,</span> <span class="n">resolve</span>
+<span class="kn">from</span> <span class="nn">base</span> <span class="kn">import</span> <span class="n">views</span>
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">AdminNotice</span>
+
+<span class="kn">from</span> <span class="nn">django.test</span> <span class="kn">import</span> <span class="n">TestCase</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.models</span> <span class="kn">import</span> <span class="n">User</span>
+<span class="kn">from</span> <span class="nn">base.models</span> <span class="kn">import</span> <span class="n">AdminNotice</span>  <span class="c1"># Replace &#39;yourapp&#39; with the actual name of your Django app</span>
+
+
+
+<div class="viewcode-block" id="TestUrls">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls">[docs]</a>
+<span class="k">class</span> <span class="nc">TestUrls</span><span class="p">(</span><span class="n">SimpleTestCase</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TestUrls.test_create_teacher_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_create_teacher_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_teacher_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_teacher&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">create_teacher</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="TestUrls.test_teacher_info_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_teacher_info_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_teacher_info_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;teacher_info&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;some_teacher_id&#39;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">teacher_info</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUrls.test_create_department_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_create_department_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_department_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_department&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">create_department</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TestUrls.test_home_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_home_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_home_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">home</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUrls.test_common_page_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_common_page_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_common_page_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;common_page&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">common_page</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUrls.test_create_student_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_create_student_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_student_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to verify that the &#39;create_student&#39; URL resolves to the correct view function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_student&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">create_student</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUrls.test_student_info_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_student_info_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_student_info_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test case to verify that the &#39;student_info&#39; URL with an argument resolves to the correct view function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;student_info&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">])</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">student_info</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TestUrls.test_update_student_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUrls.test_update_student_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_student_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test if the update_student URL resolves correctly.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_student&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;/update_student/1/&#39;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="TestUpdateTeacherURL">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUpdateTeacherURL">[docs]</a>
+<span class="k">class</span> <span class="nc">TestUpdateTeacherURL</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<div class="viewcode-block" id="TestUpdateTeacherURL.test_update_teacher_url_resolves">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.TestUpdateTeacherURL.test_update_teacher_url_resolves">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_update_teacher_url_resolves</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Define the URL with a sample primary key</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;update_teacher&#39;</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pk&#39;</span><span class="p">:</span> <span class="s1">&#39;sample_pk&#39;</span><span class="p">})</span>
+
+        <span class="c1"># Use resolve to get the resolved view function</span>
+        <span class="n">resolved_view</span> <span class="o">=</span> <span class="n">resolve</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+        <span class="c1"># Assert that the resolved view function matches the expected view function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolved_view</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">views</span><span class="o">.</span><span class="n">update_teacher</span><span class="p">)</span>
+
+        <span class="c1"># Assert that the &#39;pk&#39; parameter is passed correctly to the view function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">resolved_view</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;pk&#39;</span><span class="p">],</span> <span class="s1">&#39;sample_pk&#39;</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="UrlsTestCase">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase">[docs]</a>
+<span class="k">class</span> <span class="nc">UrlsTestCase</span><span class="p">(</span><span class="n">TestCase</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Test case for the URL patterns and views in your Django application.</span>
+
+<span class="sd">    This test case covers various views such as &#39;common_page&#39;, &#39;home&#39;,</span>
+<span class="sd">    &#39;create_notice&#39;, and &#39;notice_details&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="UrlsTestCase.setUp">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase.setUp">[docs]</a>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set up necessary data for the test case.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a test user</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notice</span> <span class="o">=</span> <span class="n">AdminNotice</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+           
+            <span class="c1"># Add any other required fields</span>
+        <span class="p">)</span></div>
+
+        <span class="c1"># Create a sample AdminNotice object</span>
+        <span class="c1">#</span>
+
+<div class="viewcode-block" id="UrlsTestCase.test_common_page_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase.test_common_page_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_common_page_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;common_page&#39; view.</span>
+
+<span class="sd">        This test checks if the &#39;common_page&#39; view returns a status code of 200.</span>
+<span class="sd">        Additional assertions can be added based on the behavior of the view.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;common_page&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+        <span class="c1"># Add more assertions based on the behavior of your common_page view</span>
+
+<div class="viewcode-block" id="UrlsTestCase.test_home_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase.test_home_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_home_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;home&#39; view.</span>
+
+<span class="sd">        This test logs in the test user and checks if the &#39;home&#39; view returns a status code of 200.</span>
+<span class="sd">        Additional assertions can be added based on the behavior of the view.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Login the test user before accessing the home view</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+        <span class="c1"># Add more assertions based on the behavior of your home view</span>
+
+<div class="viewcode-block" id="UrlsTestCase.test_create_notice_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase.test_create_notice_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_create_notice_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;create_notice&#39; view.</span>
+
+<span class="sd">        This test logs in the test user and checks if the &#39;create_notice&#39; view returns a status code of 200.</span>
+<span class="sd">        Additional assertions can be added based on the behavior of the view.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Login the test user before accessing the create_notice view</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;testuser&#39;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s1">&#39;testpassword&#39;</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;create_notice&#39;</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+
+        <span class="c1"># Add more assertions based on the behavior of your create_notice view</span>
+
+<div class="viewcode-block" id="UrlsTestCase.test_notice_details_view">
+<a class="viewcode-back" href="../../../base.test.html#base.test.test_urls.UrlsTestCase.test_notice_details_view">[docs]</a>
+    <span class="k">def</span> <span class="nf">test_notice_details_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Test the &#39;notice_details&#39; view.</span>
+
+<span class="sd">        This test checks if the &#39;notice_details&#39; view returns a status code of 200.</span>
+<span class="sd">        Additional assertions can be added based on the behavior of the view.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="s1">&#39;notice_details&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notice</span><span class="o">.</span><span class="n">pk</span><span class="p">)]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span></div>
+</div>
+
+        <span class="c1"># Add more assertions based on the behavior of your notice_details view</span>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Emmanuel Hembrom Emu.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
