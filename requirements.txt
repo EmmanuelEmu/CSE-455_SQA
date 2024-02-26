@@ -1,6 +1,2 @@
 Django==3.2.10
 django-filter==2.4.0
-pytest==7.1.2
-pytest-cov==3.0.0
-mixer==8.0.0
-django-pytest==0.4.0
