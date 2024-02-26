@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: ["update_student"] # Update branch name here
+    branches: ["Search_delete_std"] # Update branch name here
   pull_request:
-    branches: ["update_student"] # Update branch name here
+    branches: ["Search_delete_std"] # Update branch name here
 
 jobs:
   build:
